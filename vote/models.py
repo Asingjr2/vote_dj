@@ -24,11 +24,15 @@ class Image(BaseModel):
 
     @property
     def upvotes(self):
-        return self.votes.filter(vote=UPVOTE).count()
+        return self.imagevote.filter(vote=UPVOTE).count()
 
     @property
     def downvotes(self):
-        return self.votes.filter(vote=DOWNVOTE).count()
+        return self.imagevote.filter(vote=DOWNVOTE).count()
+
+    @property
+    def score(self):
+        return self.imagevote.filter(vote=DOWNVOTE).count() + self.imagevote.filter(vote=UPVOTE).count()
 
 
 class Comment(BaseModel):
@@ -41,15 +45,15 @@ class Comment(BaseModel):
 
     @property
     def upvotes(self):
-        return self.votes.filter(vote=UPVOTE).count()
+        return self.commentvote.filter(vote=UPVOTE).count()
 
     @property
     def downvotes(self):
-        return self.votes.filter(vote=DOWNVOTE).count()
+        return self.Commentvote.filter(vote=DOWNVOTE).count()
 
 
 class ImageVote(BaseModel):
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name="imagevote")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vote = models.SmallIntegerField(choices=VOTE_CHOICES, default=UPVOTE)
 
@@ -60,7 +64,7 @@ class ImageVote(BaseModel):
 
 
 class CommentVote(BaseModel):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="commentvote")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vote = models.SmallIntegerField(choices=VOTE_CHOICES, default=UPVOTE)
 

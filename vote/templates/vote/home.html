@@ -12,6 +12,7 @@
     <title>Vote</title>
 </head>
 <body>
+    <p>YOOOO</p>
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
@@ -28,6 +29,34 @@
                 <img src="{% static 'vote/images/dog.jpg' %}" alt="PICTURE OF DOG">
             </div>
         </div>
-    </div>+div.col-sm-5
+
+        <div class="row">
+            <div class="col-4">
+                <h1>{{ image.image_name }}  | {{ image.upvotes }} | {{ image.downvotes }} | score:  {{ image.score }}</h1><br>
+            </div>
+            <h1>{{ comment.body }}</h1>
+        </div>
+        <div class="row">
+            <form action="{% url 'image_upvote' image.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="1 {{ image.upvotes }}">
+                <button class="btn btn-outline-warning">UPVOTE</button>
+            </form><br>
+
+            <form action="{% url 'image_delete' image.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-outline-warning">IMAGE DELETE</button>
+            </form><br>
+
+            <form action="{% url 'comment_delete' comment.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-outline-warning">COMMENT DELETE</button>
+            </form><br>
+
+
+
+
+        </div>
+    </div>
 </body>
 </html>
