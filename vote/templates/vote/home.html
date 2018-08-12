@@ -39,7 +39,6 @@
         <div class="row">
             <form action="{% url 'image_upvote' image.id %}" method="post">
                 {% csrf_token %}
-                <input type="submit" value="1 {{ image.upvotes }}">
                 <button class="btn btn-outline-warning">UPVOTE</button>
             </form><br>
 

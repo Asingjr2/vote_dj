@@ -1,0 +1,20 @@
+#main_pic{
+    margin: 10px;
+    height: 100px;
+    width: 14rem;
+    padding: 10px;
+    border: green 10px dotted;
+}
+
+#main_carousel{
+    width:80%;
+    height:300px;
+}
+
+.carousel-inner img{
+        margin: 10px;
+        height: 100px;
+        width: 14rem;
+        padding: 10px;
+        border: green 10px dotted;
+    }
