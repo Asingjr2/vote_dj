@@ -23,16 +23,12 @@ class HomeView(TemplateView):
 
 class ImageDetailView(DetailView):
     model = Image
+    pk_url_kwarg = 'pk'
 
 
 class ImageDeleteView(DeleteView):
     model = Image
-    lookup_field = "pk"
-    success_url = reverse_lazy("home")
-
-
-class CommentDeleteView(DeleteView):
-    model = Comment
+    # lookup_field = "pk"
     success_url = reverse_lazy("home")
 
 
@@ -75,6 +71,14 @@ class ImageDownvoteView(View):
             )
         return redirect("home")
 
+    
+class CommentDetailView(DetailView):
+    model = Comment
+
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+    success_url = reverse_lazy("home")
 
 
 class CommentUpvoteView(View):
@@ -115,14 +119,3 @@ class CommentDownvoteView(View):
                 vote=UPVOTE
             )
         return redirect("home")
-
-
-class ImageDownVoteView(View):
-    pass
-
-
-class CommentUpVoteView(View):
-    pass
-
-class CommentDownVoteView(View):
-    pass
