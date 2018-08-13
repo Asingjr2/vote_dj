@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Internal
     "base",
     "vote",
+    "maps",
     # External
     "rest_framework"
 ]
