@@ -30,7 +30,7 @@ class MapHomeView(View):
         print(url)
 
         # return render(request, "index.html", {"url":url, "embed_url":embed_url, "locations":locations})
-        return render(request, "home.html", {"url":url, "embed_url":embed_url, "locations":locations})
+        return render(request, "locations.html", {"url":url, "embed_url":embed_url, "locations":locations})
 
     def post(self, request):
         print(request.POST)

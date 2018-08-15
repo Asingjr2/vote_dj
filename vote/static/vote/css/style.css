@@ -4,3 +4,21 @@
     padding: 10 0 10 0;
     border-bottom: 5px ridge rgb(250, 216, 62);
 }
+#tall{
+    height:100%;
+}
+#card_img{
+    height:50px;
+}
+.card-text{
+    text-decoration: underline;
+}
+.card form {
+    display: inline-block;
+}
+.carousel-item img{
+    height: 100%;
+}
+#body_div{
+    width:50%;
+}

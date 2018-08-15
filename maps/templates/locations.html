@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% load staticfiles %}
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'maps/style.css' %}">
+{% endblock %}
+{% block body %}
+<section id="white">
+    <div class="container" >
+        <div id="floating-panel">
+            <input type="text" name="start" id="start" placeholder="start point">
+            <select name="end" id="end">
+                {% for place in locations %}
+                <option value="{{ place }} ">{{ place }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div id="right-panel"></div>
+        <div id="map"></div>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqau3bClOAWzm_pS8qhlVBtDAbFHrzSCQ&callback=initMap">
+        </script>
+    </div>    
+</section>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'maps/jquery.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,52 @@
+#main_container{
+    background-color: rgb(250, 216, 62);
+    min-height: 660px;
+}
+#info_container{
+    background-color:white;
+    min-height:920px;
+    border-bottom: rgb(250, 216, 62);
+}
+#banner{
+    color: rgb(250, 216, 62);
+    height:60px;
+    padding: 10 10 10 10;
+    margin-bottom: 10px;
+    background-color: white;
+    text-align: center;
+    border-bottom: 5px ridge rgb(250, 216, 62);
+}
+h1,h5 {
+    font-family: cursive
+}
+#info_banner{
+    height:50px;
+    padding: 10 0 10 0;
+    margin-bottom: 10px;
+    background-color: white;
+    border-bottom: 5px ridge rgb(250, 216, 62);
+}
+#info_banner p {
+    display: inline-block
+}
+
+#footer{
+    margin-top:20px;
+    color: blue;
+    text-align: center;
+    padding: 10 0 10 0;
+    border-bottom: 5px ridge rgb(250, 216, 62); 
+    background-color:white;
+}
+#foot_col{
+    margin-left:5px;
+    text-align: center;
+}
+
+.nav li{
+    margin-left:20px;
+}
+#center{
+    align-items: center;
+    align-content: center;
+}
