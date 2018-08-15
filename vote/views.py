@@ -11,7 +11,7 @@ from .models import Image, ImageVote, Comment, CommentVote, UPVOTE, DOWNVOTE
 
 
 class HomeView(TemplateView):
-    template_name = "vote/adopt.html"
+    template_name = "vote/test.html"
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
