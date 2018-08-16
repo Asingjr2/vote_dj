@@ -14,6 +14,16 @@ VOTE_CHOICES = (
 )
 
 
+class Recommendation(BaseModel):
+    subject = models.CharField(max_length=100)
+    body = models.CharField(max_length=250)
+    email = models.EmailField()
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return "Comment subject: {}".format(self.subject)
+
+
 class Image(BaseModel):
     image_name = models.CharField(max_length=100)
     url = models.CharField(max_length=150, blank=True, null=True)

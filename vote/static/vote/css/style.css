@@ -22,3 +22,13 @@
 #body_div{
     width:50%;
 }
+#green_border{
+    border: 25px green solid;
+}
+#red{
+    color:red;
+}
+#ears{
+    width:80%;
+    height:50%;
+}
