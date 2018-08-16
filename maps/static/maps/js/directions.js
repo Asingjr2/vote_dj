@@ -3,11 +3,24 @@
     var display = new google.maps.DirectionsRenderer;
     var service = new google.maps.DirectionsService;
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 7,
+      zoom:15,
       center: {lat: 41.85, lng: -87.65}
     });  
     display.setMap(map);
     display.setPanel(document.getElementById("right-panel"));
+
+    var Woodbride_DP = new google.maps.Marker({
+      position: {lat: 41.85, lng: -87.67},
+      map: map,
+      title: 'Woodbridge'
+    });
+  
+    var Alexandria_DP = new google.maps.Marker({
+      position: {lat: 41.85, lng: -87.69},
+      map: map,
+      title: 'Alexandria'
+    });
+  
   
     var control = document.getElementById("floating-panel");
     control.style.display = "block";
@@ -21,6 +34,7 @@
     document.getElementById("start").addEventListener("change", onChange);
     document.getElementById("end").addEventListener("change", onChange);
   }  
+
 function calculateAndDisplay(service, display){
   var start = document.getElementById("start").value;
   var end = document.getElementById("end").value;

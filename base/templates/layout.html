@@ -20,7 +20,14 @@
             
             <div class="row">
                 <div class="col" id="banner">
-                    <h1>ADOPT A FRIEND</h1>
+
+                    <h1 id="base_color"  >
+                        <a href="{% url 'home' %}">
+                            <span  >
+                                ADOPT A FRIEND
+                            </span>
+                        </a>
+                    </h1>
                 </div>
             </div>
             
@@ -63,10 +70,10 @@
                     <a href="">
                         <h5>Volunteer</h5>
                     </a>
-                    <a href="">
+                    <a href="{% url 'parks' %}">
                         <h5>Popular Dog Parks</h5>
                     </a>
-                    <a href="">
+                    <a href="{% url 'contact_us' %}">
                         <h5>Contact</h5>
                     </a>
                 </div>

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% block body %}
+<div>
+    <div class="row" id="green_border">
+        <div class="col-sm-4">
+            <h1>HOW ARE WE DOING???</h1>
+            <hr>
+            <br>
+            <h4>At Adopt a Friend we take your feedback very seriously.  Tell us how were doing.  We are all EARS!!!</h4>
+            <img id="ears" src="{% static 'vote/images/dog_ears.jpg' %}" alt="picture of large dog ears">
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-6" id="green_border">
+            <div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li id="red">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <form action="" method="post" id="recommendation-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-success">SUBMIT </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'vote/jquery/contact.js' %}"></script>
+{% endblock %}

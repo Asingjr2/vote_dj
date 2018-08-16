@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.views import View
 from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView
 
 import requests
 
@@ -9,6 +10,7 @@ from .locations import current_locations
 
 # Replace with information locked somewhere
 KEY = "AIzaSyCqau3bClOAWzm_pS8qhlVBtDAbFHrzSCQ"
+
 
 class MapHomeView(View):
     def get(self, request):
@@ -39,3 +41,6 @@ class MapHomeView(View):
         request.session["route"] = 1
         return redirect("/locations")
 
+
+class ParkView(TemplateView):
+    template_name = "parks.html"
