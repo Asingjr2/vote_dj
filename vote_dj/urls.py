@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("vote.urls")),
     path("locations/", include("maps.urls")),
+    path("messageboard/", include("messageboard.urls")),
 ]
