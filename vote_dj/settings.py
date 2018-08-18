@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "maps",
     "messageboard",
     # External
-    "rest_framework"
+    "rest_framework",
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Cripsyform settings
+
+CRISPY_TEMPLATE_PACK = "bootstrap4" 
