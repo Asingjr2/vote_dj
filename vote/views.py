@@ -11,6 +11,10 @@ from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from .models import Image, ImageVote, Comment, CommentVote, UPVOTE, DOWNVOTE, Recommendation
 from .forms import RecommendationForm
 
+######
+from messageboard.models import Forum
+######
+
 
 class HomeView(TemplateView):
     template_name = "vote/adopt.html"
@@ -151,3 +155,16 @@ class CommentDownvoteView(View):
                 vote=UPVOTE
             )
         return redirect("home")
+
+
+
+
+######TEST
+class TestView(TemplateView):
+    template_name = "vote/test.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TestView, self).get_context_data(**kwargs)
+        context["all_forums"] = Forum.objects.all()
+        return context
+############

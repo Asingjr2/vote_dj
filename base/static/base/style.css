@@ -53,3 +53,9 @@ h1,h5 {
     align-items: center;
     align-content: center;
 }
+#forum_box{
+    max-height: 200px;
+    background-color:white;
+    padding: 10px;
+    overflow: auto;
+}

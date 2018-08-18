@@ -11,11 +11,22 @@ from .views import (
     CommentUpvoteView,
     CommentDownvoteView,
     CommentDeleteView,
-    ContactUsView
+    ContactUsView,
+
+
+    #
+    TestView
 )
 
 # app_name = "vote"
 urlpatterns = [
+
+
+    #######TEST
+    path("test", TestView.as_view(), name="test"),
+
+    #######
+
     path("", HomeView.as_view(), name="home"),
     # Detail
     path("image/<uuid:pk>", ImageDetailView.as_view(), name="image_detail"),
