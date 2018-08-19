@@ -1,0 +1,6 @@
+#forum_box{
+    max-height: 200px;
+    background-color:white;
+    padding: 10px;
+    overflow: auto;
+}

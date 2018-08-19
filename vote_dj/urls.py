@@ -7,4 +7,5 @@ urlpatterns = [
     path("locations/", include("maps.urls")),
     path("messageboard/", include("messageboard.urls")),
     path("api/messageboard/", include("api.urls")),
+    path("adopt/", include("adopt.urls")),
 ]

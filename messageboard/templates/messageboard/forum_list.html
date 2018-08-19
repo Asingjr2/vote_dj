@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'messageboard/style.css' %}">
+{% endblock %}
+{% block body %}
+<div>
+    <div class="row">
+        <div class="col-4">
+            <div class="row">
+                <!-- <form action="">
+                    {% csrf_token %}
+                    {{ search_form..as_p }}
+                    <button class="btn btn-outline-info">SEARCH FORUMS</button>
+                </form> -->
+            </div>
+            <div class="row">
+                <div class="pill">
+                    <a href="{% url 'messageboard:forum_create' %}">
+                        CREATE NEW FORUMS
+                    </a>
+                </div>
+        </div>
+        </div>
+
+        <div class="col-1"></div>
+
+        <div class="col-6" id="forum_box">
+            <div>ALL FORUMS</div>
+            <div>
+            {% for obj in object_list %}
+                <a href="{{ obj.get_absolute_url }}"><h3>{{ obj.slug }}</h3></a>
+                {% if user in obj.moderators.all %}
+                <form action="{% url 'messageboard:forum_delete' obj.slug %}">
+                    <button class="btn btn-danger">DELETE</button>
+                </form>
+                {% endif %}
+                {% empty %}
+                <p>There aren't any Subreddits</p>
+                {% endfor %}
+            </div>
+        </div>
+</div>
+{% endblock %}

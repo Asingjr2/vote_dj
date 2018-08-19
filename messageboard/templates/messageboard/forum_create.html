@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action="{% url 'messageboard:forum_create' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value="CREATE FORUM">
+</form>
+{% endblock %}

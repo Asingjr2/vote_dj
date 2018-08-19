@@ -5,7 +5,7 @@ import factory.fuzzy
 
 from base.factories import BaseModelFactory
 
-from .models import Image, Comment, ImageVote, CommentVote
+from .models import Image,ImageVote
 
 
 CHOICES = [-1,1]
@@ -31,23 +31,5 @@ class ImageVoteFactory(factory.django.DjangoModelFactory):
         model = ImageVote
 
     image = factory.SubFactory(ImageFactory)
-    user = factory.SubFactory(UserFactory)
-    vote = factory.fuzzy.FuzzyChoice(CHOICES)
-
-
-class CommentFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Comment
-
-    image = factory.SubFactory(ImageFactory)
-    user = factory.SubFactory(UserFactory)
-    body = factory.fuzzy.FuzzyText(length=250)
-
-
-class CommentVoteFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = CommentVote
-    
-    comment = factory.SubFactory(CommentFactory)
     user = factory.SubFactory(UserFactory)
     vote = factory.fuzzy.FuzzyChoice(CHOICES)

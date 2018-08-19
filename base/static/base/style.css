@@ -13,8 +13,8 @@
 #banner{
     color: rgb(250, 216, 62);
     height:60px;
-    padding: 10 10 10 10;
-    margin-bottom: 10px;
+    padding-bottom:15px;
+    margin-bottom: 20px;
     background-color: white;
     text-align: center;
     border-bottom: 5px ridge rgb(250, 216, 62);
@@ -23,7 +23,7 @@ h1,h5 {
     font-family: cursive
 }
 #info_banner{
-    height:50px;
+    height:70px;
     padding: 10 0 10 0;
     margin-bottom: 10px;
     background-color: white;
@@ -58,4 +58,26 @@ h1,h5 {
     background-color:white;
     padding: 10px;
     overflow: auto;
+}
+#sprite{
+    height: 30px;
+    width: 30px;
+}
+#sprite_left{
+    height: 40px;
+    width: 30px;
+    margin-left:20px;
+    margin-right:5px;
+}
+#sprite_right{
+    height: 40px;
+    width: 30px;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+#meowth{
+    height: 50px;
+    width: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
 }

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "vote",
     "maps",
     "messageboard",
+    "adopt",
     # External
     "rest_framework",
     'crispy_forms',

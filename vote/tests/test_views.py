@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 
 import factory
 
-from ..factories import ImageFactory, ImageVoteFactory, CommentFactory, CommentVoteFactory, UserFactory
+from ..factories import ImageFactory, ImageVoteFactory, UserFactory
 
 
 class HomeViewTest(TestCase):
@@ -29,20 +29,3 @@ class ImageUpvoteViewTestCase(TestCase):
 
 class ImageDownvoteViewTestCase(TestCase):
     pass
-
-
-class CommentDetailViewTestCase(TestCase):
-    pass
-
-
-class CommentDeleteViewTestCase(TestCase):
-    pass
-
-
-class CommentpvoteViewTestCase(TestCase):
-    pass
-
-
-class CommentDownvoteViewTestCase(TestCase):
-    pass
-

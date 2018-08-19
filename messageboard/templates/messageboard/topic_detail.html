@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block body %}
+<section>
+    <h1>{{ object.title }}</h1>
+    <p>Topic description fdfdafdad</p>
+    <h1>ADD COMMENT</h1>
+    <br>
+    {% for comment in object.topiccomment_set.all %}
+    <h1> {{ comment.body }}</h1>
+    {% empty %}
+    <h2>NOT COMMENTS YET</h2>
+    {% endfor %}
+    <form action="{% url 'messageboard:topic_comment_create' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="topic_id" value="{{ object.id }}">
+        <input type="hidden" name="topic_slug" value="{{ object.slug }}">
+        <input type="hidden" name="user" value="{{ object.creator.id }} ">
+        {{ topic_comment_form.as_p }}
+        <input type="submit">SUBMIT
+    </form>
+
+
+</section>
+
+
+
+{% endblock %}

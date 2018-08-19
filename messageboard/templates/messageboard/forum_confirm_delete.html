@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron" id="delete_forum">
+    <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object.slug }}"?</p>
+        <button class="btn btn-danger">Confirm</button>
+    </form>
+</div>
+{% endblock %}
