@@ -28,3 +28,8 @@
 #marginL h5,p,form{
     margin-left: 15px;
 }
+#bad_forum{
+    color:red;
+    text-decoration: underline;
+    background-color:white;
+}

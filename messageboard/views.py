@@ -7,8 +7,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.db.models import Q
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .mixins import ModeratorRequiredMixin
 from .forms import ForumUpdateForm, ForumCreateForm, TopicCreateForm,TopicCommentCreateForm
@@ -22,7 +23,7 @@ from .models import (
     DOWNVOTE,
 )
 
-class ForumDetailView(DetailView):
+class ForumDetailView(LoginRequiredMixin, DetailView):
     model = Forum
 
     def get_context_data(self, **kwargs):
@@ -31,7 +32,7 @@ class ForumDetailView(DetailView):
         return context
     
  
-class ForumCreateView(CreateView):
+class ForumCreateView(LoginRequiredMixin, CreateView):
     model = Forum
     fields = ["slug"]
     template_name_suffix = "_create"
@@ -45,11 +46,11 @@ class ForumCreateView(CreateView):
     def form_invalid(self, form):
         print("something happened", form.non_field_errors)
         if "slug" in form.errors:
-            messages.warning(self.request, 'Forum name  cannot contain characters')
-        return HttpResponseRedirect(reverse("messageboard:forum_list"))
+            messages.warning(self.request, 'Forum name  cannot contain spaces.  Please try again!')
+        return HttpResponseRedirect(reverse("messageboard:forum_create"))
 
 
-class ForumListView(ListView):
+class ForumListView(LoginRequiredMixin, ListView):
     model = Forum
     queryset = Forum.objects.all()
 
@@ -66,20 +67,12 @@ class ForumListView(ListView):
         return q_set
             
 
-class ForumUpdateView(ModeratorRequiredMixin, UpdateView):
-    model = Forum
-    form_class = ForumUpdateForm
-
-    def get_forum(self):
-        return self.get_object()
-
-
-class ForumDeleteView(DeleteView):
+class ForumDeleteView(LoginRequiredMixin, DeleteView):
     model = Forum
     success_url = reverse_lazy("messageboard:forum_list")
 
 
-class TopicCreateView(View):
+class TopicCreateView(LoginRequiredMixin, View):
     
     def post(self, request):
         form = TopicCreateForm(request.POST)
@@ -93,7 +86,7 @@ class TopicCreateView(View):
         return HttpResponseRedirect(reverse("messageboard:forum_detail", args= (request.POST["forum_slug"],)))
 
 
-class TopicDetailView(DetailView):
+class TopicDetailView(LoginRequiredMixin, DetailView):
     model = Topic
     pk_url_kwarg = 'topic_id'
 
@@ -144,7 +137,7 @@ class TopicDownvoteView(LoginRequiredMixin, View):
         return reverse("forum_list")
 
 
-class TopicCommentCreateView(View):
+class TopicCommentCreateView(LoginRequiredMixin, View):
     
     def post(self, request):
         form = TopicCommentCreateForm(request.POST)
@@ -158,8 +151,3 @@ class TopicCommentCreateView(View):
             current_topic = Topic.objects.get(id=request.POST["topic_id"])
             print(request.POST["topic_id"])
         return redirect("/messageboard/{}/{}/{}".format(current_topic.forum.slug, current_topic.id,            current_topic.slug,))
-
-        
-class TopicCommentDetailView(DetailView):
-    model = TopicComment
-    pk_url_kwarg = 'topic_comment_id'

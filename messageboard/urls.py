@@ -4,7 +4,6 @@ from . import views
 from .views import (
     ForumDetailView, 
     ForumCreateView, 
-    ForumUpdateView,
     ForumListView,
     ForumDeleteView,
 
@@ -13,7 +12,6 @@ from .views import (
     TopicUpvoteView,
     TopicDownvoteView,
 
-    TopicCommentDetailView, 
     TopicCommentCreateView, 
 )
 
@@ -29,9 +27,6 @@ urlpatterns = [
     path('<slug:slug>/',
          ForumDetailView.as_view(),
          name='forum_detail'),
-    path('<slug:slug>/update/',
-         ForumUpdateView.as_view(),
-         name='forum_moderators_add'),
     path('<slug:slug>/forum_delete/',
          ForumDeleteView.as_view(),
          name='forum_delete'),
@@ -50,10 +45,6 @@ urlpatterns = [
          TopicDownvoteView.as_view(),
          name='topic_downvote'),
 
-    # TopicComment urls
-    path('<slug:forum_slug>/<uuid:topic_id>/<slug:topic_slug>/<uuid:topic_comment_id>/',
-         TopicCommentDetailView.as_view(),
-         name='topic_comment_detail'),
     path('comment/comment_create/',
          TopicCommentCreateView.as_view(),
          name='topic_comment_create'),
