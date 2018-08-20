@@ -1,51 +1,52 @@
 {% extends 'layout.html' %}
-{% load humanize %}
 
-{% block meta_title %}{{ object.slug }}{% endblock %}
-{% block meta_description %}Subreddit description{% endblock %}
-{% block meta_og_title %}{{ object.slug }}{% endblock %}
-{% block meta_og_description %}Subreddit description{% endblock %}
-
-{% block extra_style %}
-    <style>
-        div.post-item {
-            border: 1px solid #000000;
-            padding: 0em 2em;
-        }
-    </style>
-{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block body %}
-    <section>
-        <h1>{{ object.slug }}</h1>
-        <h2>ADD TOPIC</h2>
+
+<h1>FORUM: {{ object.slug }}</h1>
+{% if object.topic_set.all.count < 1 %}
+    <div >
+        <h1>Be the first to create a topic in {{ object.slug | upper }}</h1>
         <form action="{% url 'messageboard:topic_create' %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="forum_slug" value="{{ object.slug }}">
-                {{ topic_form.as_p}}
-            <input type="submit" value="ADD TOPIC">
+                {{ topic_form | crispy}}
+            <button class="btn btn-success">ADD TOPIC</button>
         </form>
-    </section>
+    </div>
+{% else %}
+    <table class="table table-success table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>TOPICS</th>
+                <th>CREATED</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in object.topic_set.all %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="{% url 'messageboard:topic_detail' object.slug topic.id topic.slug %}">{{ topic.title | upper }}</a>
 
-    <section>
-        {% for topic in object.topic_set.all %}
-            <div>
-                 {% if user.is_authenticated %}
-                <form action="{% url 'messageboard:topic_upvote' topic.id %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="⬆️ {{ topic.upvotes }}" />
-                </form>
-                <form action="{% url 'messageboard:topic_downvote' topic.id %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="⬇️ {{ topic.downvotes }}" />
-                </form>
-                {% endif %}
-                <a href="{{ topic.get_absolute_url }}"><h3>{{ topic }}</h3></a>
-                <p>submitted {{ topic.created_at|naturaltime }} by {{ topic.user }}</a></p>
-            </div>
-        {% empty %}
-            <p>There aren't any topics.</p>
-        {% endfor %}
-        <h1>ZZZZZZZZZZZZZZZZZZZZZZZZ</h1>
-    </section>
+                </td>
+                <td>{{ topic.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr><br>
+    <div>
+        <h4>ADD TOPIC</h4>
+        <form action="{% url 'messageboard:topic_create' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="forum_slug" value="{{ object.slug }}">
+                {{ topic_form | crispy}}
+            <button class="btn btn-success">ADD TOPIC</button>
+        </form>
+    </div>
+{% endif %}
+
 {% endblock %}

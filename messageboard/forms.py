@@ -1,8 +1,6 @@
 from django import forms
 from django.forms import ModelForm, HiddenInput
 
-from crispy_forms.helper import FormHelper
-
 from .models import Forum, Topic, TopicComment
 
 
@@ -24,7 +22,14 @@ class ForumCreateForm(ModelForm):
 class TopicCreateForm(ModelForm):
     class Meta:
         model = Topic
-        fields = ("title",)
+        fields = ("title","body",)
+        widgets = {
+        "body": forms.Textarea(attrs = {
+            "label": "",
+            "placeholder": "Add new message", 
+            "maxLength":"300", 
+        }), 
+    }
 
 
 class TopicCommentCreateForm(ModelForm):
@@ -35,17 +40,7 @@ class TopicCommentCreateForm(ModelForm):
         "body": forms.Textarea(attrs = {
             "class": "form-control",
             "label": "",
-            "placeholder": "Add new message", 
+            "placeholder": "Add new comment", 
             "maxLength":"250", 
         }), 
     }
-
-
-class SearchForumForm(forms.Form):
-    query = forms.CharField(max_length=150, label="ForuSEARCH ALL FORUMS")
-
-    def __init__(self, *args, **kwargs):
-        super(SearchForumForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_id = "search_forum"
-        self.helper.form_class = "form"

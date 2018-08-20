@@ -7,10 +7,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 
 from .mixins import ModeratorRequiredMixin
-from .forms import ForumUpdateForm, ForumCreateForm, TopicCreateForm,TopicCommentCreateForm, SearchForumForm
+from .forms import ForumUpdateForm, ForumCreateForm, TopicCreateForm,TopicCommentCreateForm
 
 from .models import (
     Forum,
@@ -36,17 +37,16 @@ class ForumCreateView(CreateView):
     template_name_suffix = "_create"
     success_url = reverse_lazy("messageboard:forum_list")
 
-    def post(self, request):
-        def form_valid(self, form):
-            self.object = form.save()
-            self.object.moderators.add(self.request.user)
-            return HttpResponseRedirect(self.get_success_url())
-        
-        def form_invalid(self, form):
-            print("something happened", form.non_field_errors)
-            if "slug" in form.errors:
-                messages.warning(self.request, 'Forum name  cannot contain characters')
-            return HttpResponseRedirect("/forum_list")
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.moderators.add(self.request.user)
+        return HttpResponseRedirect(self.get_success_url())
+    
+    def form_invalid(self, form):
+        print("something happened", form.non_field_errors)
+        if "slug" in form.errors:
+            messages.warning(self.request, 'Forum name  cannot contain characters')
+        return HttpResponseRedirect(reverse("messageboard:forum_list"))
 
 
 class ForumListView(ListView):
@@ -55,10 +55,16 @@ class ForumListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search_form"] = SearchForumForm()
         context["forum_create_form"] = ForumCreateForm()
         return context
 
+    def get_queryset(self, *args, **kwargs):
+        q_set = Forum.objects.all()
+        query = self.request.GET.get("q", None)
+        if query is not None:
+            q_set = q_set.filter(Q(slug__icontains = query))
+        return q_set
+            
 
 class ForumUpdateView(ModeratorRequiredMixin, UpdateView):
     model = Forum
@@ -70,7 +76,7 @@ class ForumUpdateView(ModeratorRequiredMixin, UpdateView):
 
 class ForumDeleteView(DeleteView):
     model = Forum
-    success_url = reverse_lazy("forum_list")
+    success_url = reverse_lazy("messageboard:forum_list")
 
 
 class TopicCreateView(View):
@@ -84,7 +90,7 @@ class TopicCreateView(View):
                 title = request.POST["title"]
             )
             new_topic.save()
-        return HttpResponseRedirect(reverse("forum_detail", args= (request.POST["forum_slug"],)))
+        return HttpResponseRedirect(reverse("messageboard:forum_detail", args= (request.POST["forum_slug"],)))
 
 
 class TopicDetailView(DetailView):

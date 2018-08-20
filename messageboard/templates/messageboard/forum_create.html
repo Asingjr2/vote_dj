@@ -1,9 +1,11 @@
 {% extends 'layout.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block body %}
 <form action="{% url 'messageboard:forum_create' %}" method="POST">
     {% csrf_token %}
-    {{ form.as_p}}
-    <input type="submit" value="CREATE FORUM">
+    {{ form | crispy }}
+    <button class="btn btn-success">CREATE FORUM</button>
 </form>
 {% endblock %}

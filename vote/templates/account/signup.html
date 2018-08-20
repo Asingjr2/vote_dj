@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% load staticfiles %}
+{% block body %}
+<div class="jumbotron marginB" id="white">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="5">
+            {% include "account/std_signup.html" %}
+        </div>
+    </div>
+</div>
+{% endblock %}

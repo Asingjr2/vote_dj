@@ -41,6 +41,8 @@ class Topic(BaseModel):
     )
     title = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='title')
+    body = models.TextField(
+        validators=[MaxLengthValidator(300)], blank=True, null=True)
 
     @property
     def upvotes(self):

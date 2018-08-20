@@ -7,39 +7,50 @@
 {% block body %}
 <div>
     <div class="row">
-        <div class="col-4">
-            <div class="row">
-                <!-- <form action="">
-                    {% csrf_token %}
-                    {{ search_form..as_p }}
-                    <button class="btn btn-outline-info">SEARCH FORUMS</button>
-                </form> -->
+        
+        <div class="col-7" id="forum_box">
+            <div>
+            {% for obj in object_list %}
+            <div class="row" id="marginL">
+
+                <h5>Forum: <a href="{{ obj.get_absolute_url }}">{{ obj.slug }}</a></h5>
+                <p>Related Topics: {{ obj.topic_set.all.count }}</p> 
+                    {% if user in obj.moderators.all %}
+                    <form action="{% url 'messageboard:forum_delete' obj.slug %}" id="floatR">
+                        <button class="btn btn-danger">DELETE</button>
+                    </form>
+            </div><hr>
+                {% endif %}
+                {% empty %}
+                <p>NO FORUMS</p>
+                {% endfor %}
             </div>
-            <div class="row">
-                <div class="pill">
-                    <a href="{% url 'messageboard:forum_create' %}">
-                        CREATE NEW FORUMS
-                    </a>
-                </div>
-        </div>
         </div>
 
         <div class="col-1"></div>
-
-        <div class="col-6" id="forum_box">
-            <div>ALL FORUMS</div>
-            <div>
-            {% for obj in object_list %}
-                <a href="{{ obj.get_absolute_url }}"><h3>{{ obj.slug }}</h3></a>
-                {% if user in obj.moderators.all %}
-                <form action="{% url 'messageboard:forum_delete' obj.slug %}">
-                    <button class="btn btn-danger">DELETE</button>
-                </form>
-                {% endif %}
-                {% empty %}
-                <p>There aren't any Subreddits</p>
-                {% endfor %}
+        
+        <div class="col-3">
+            <div class="row" >
+                <div class="jumbotron" id="forum_list_optional">
+                    <form action="{% url 'messageboard:forum_list' %}" method="get" class="form">
+                        {% csrf_token %}
+                        <div class="form-set">
+                            <label for="q">SEARCH ALL FORUMS</label>
+                            <input type="text" name="q" placeholder="forum keywords" value="{{ request.GET.q }}">
+                        </div><br>
+                        <button class="btn btn-large btn-outline-info">SEARCH FORUMS</button>
+                    </form>
+                </div>
             </div>
+            <div class="row">
+                <div class="jumbotron" id="forum_list_optional">
+                    <br><br><button class="btn btn-large btn-outline-info">
+                        <a href="{% url 'messageboard:forum_create' %}">
+                            CREATE NEW FORUM
+                        </a>
+                    </button>
+                </div>
+        </div>
         </div>
 </div>
 {% endblock %}

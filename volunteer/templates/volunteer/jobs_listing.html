@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% block body %}
+<div>
+    <h1>
+        VOLUNTEERING
+    </h1>
+    <table class="table table-success table-hover table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>LOCATION</th>
+                <th>TITLE</th>
+                <th>TYPE</th>
+                <th>INTERESTED</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in object_list %}
+            <tr>
+                <td>{{ forloop.counter }} </td>
+                <td> {{ job.location }}</td>
+                <td>{{ job.title }}</td>
+                <td>{{ job.hours | upper }}</td>
+                <td>
+                    <a href="{% url 'volunteer:job_apply' job.id %}">APPLY</a>
+                    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
