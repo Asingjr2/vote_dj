@@ -32,6 +32,6 @@ class VolunteerApplication(BaseModel):
     last_name = models.CharField(max_length=50, blank=True)
     about_you = models.TextField(validators=[MaxLengthValidator(250), MinLengthValidator(10)])
     email = models.EmailField(validators = [EmailValidator()])
-    contact_number = models.IntegerField(validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)])
+    contact_number = models.IntegerField(validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)], blank=True, null=True)
 
     

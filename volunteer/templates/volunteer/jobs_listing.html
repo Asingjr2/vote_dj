@@ -1,34 +1,49 @@
 {% extends "layout.html" %}
 
 {% load staticfiles %}
+
 {% block body %}
 <div>
-    <h1>
-        VOLUNTEERING
-    </h1>
-    <table class="table table-success table-hover table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th>#</th>
-                <th>LOCATION</th>
-                <th>TITLE</th>
-                <th>TYPE</th>
-                <th>INTERESTED</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for job in object_list %}
-            <tr>
-                <td>{{ forloop.counter }} </td>
-                <td> {{ job.location }}</td>
-                <td>{{ job.title }}</td>
-                <td>{{ job.hours | upper }}</td>
-                <td>
-                    <a href="{% url 'volunteer:job_apply' job.id %}">APPLY</a>
+    <div class="row">
+        <div class="col-4">
+            <h1>VOLUNTEERING</h1>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-5">
+            <form action="{% url 'volunteer:jobs_listing' %}" method="get" class="form">
+                {% csrf_token %}
+                <label for="q">SEARCH ALL JOBS</label>
+                <input type="text" name="q" placeholder="forum keywords" value="{{ request.GET.q }}">
+                <button class="btn btn-large btn-outline-info">SEARCH JOBS</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+
+        <table class="table table-success table-hover table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>LOCATION</th>
+                    <th>TITLE</th>
+                    <th>TYPE</th>
+                    <th>INTERESTED</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in object_list %}
+                <tr>
+                    <td>{{ forloop.counter }} </td>
+                    <td> {{ job.location }}</td>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.hours | upper }}</td>
+                    <td>
+                        <a href="{% url 'volunteer:job_apply' job.id %}">APPLY</a>
                     </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

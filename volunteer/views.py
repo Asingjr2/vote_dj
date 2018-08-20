@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, HttpRequest
 from django.contrib import messages
+from django.db.models import Q
 
 from .models import VolunteerApplication, VolunteerJob
 from .forms import VolunteerApplicationForm
@@ -12,6 +13,16 @@ from .forms import VolunteerApplicationForm
 class JobListingView(ListView):
     queryset = VolunteerJob.objects.all()
     template_name = "volunteer/jobs_listing.html"
+
+    def get_queryset(self, *args, **kwargs):
+        q_set = VolunteerJob.objects.all()
+        query = self.request.GET.get("q", None)
+        if query is not None:
+            q_set = q_set.filter(
+            Q(title__icontains = query) |
+            Q(hours__icontains = query) |
+            Q(location__icontains = query))
+        return q_set
 
 
 class VolunteerApplicationFormView(CreateView):

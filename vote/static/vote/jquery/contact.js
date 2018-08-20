@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    $("#recommendation-form").submit(function(){
+        alert("Thank you for contacting us.  One of our staff members will reach out shortly. ")
+    });
+
     var startCharsCount = 250;
     var currentCharCount = 0;
 
@@ -15,5 +19,6 @@ $(document).ready(function(){
         console.log(messageValue)
 
     })
+
 
 })
