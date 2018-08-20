@@ -32,3 +32,16 @@
     width:80%;
     height:50%;
 }
+#white{
+    background-color:white;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+}
+#center{
+    align-content: center;
+    justify-content: center;
+}
+.marginB{
+    margin-bottom:15px;
+}

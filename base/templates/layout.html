@@ -20,7 +20,6 @@
             
             <div class="row">
                 <div class="col" id="banner">
-
                     <h1 id="base_color"  >
                         <a href="{% url 'home' %}">
                             <span  >
@@ -47,9 +46,15 @@
                         <img src="{% static 'base/sprite.jpg' %}" alt="sprite of dog" id="sprite_left">
                         <button class="btn">
                             <li class="nav-item" id="short_button">
-                                <a href="">
-                                    <h5>Sign Up/In to Communicate With Other Pet Lovers! </h5>
-                                </a>
+                                {% if user.is_authenticated %}
+                                    <a href="/accounts/logout/">
+                                        <h5>Logout Until Next Time</h5>
+                                    </a>
+                                {% else %}
+                                    <a href="/accounts/signup/">
+                                        <h5>Sign Up/In to Communicate With Other Pet Lovers!</h5>
+                                    </a>
+                                {% endif %}
                             </li>
                         </button>
                         <img src="{% static 'base/sprite.jpg' %}" alt="sprite of dog" id="sprite_right">
@@ -81,7 +86,7 @@
                         </li>
                         <img src="{% static 'base/meowth.png' %}" alt="picture of meowth" id="meowth">
                         <li class="nav-item">
-                            <a href="{% url 'volunteer' %}">
+                            <a href="{% url 'volunteer:jobs_listing' %}">
                                 <h5>Volunteer</h5>
                             </a>
                         </li>
@@ -89,6 +94,7 @@
                     </ul>
                 </div>
             </div>
+            <h1>{{ user.username }}</h1>
             {% block extra_js %}{% endblock %}
         </div>
     </div>

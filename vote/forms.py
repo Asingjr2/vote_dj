@@ -31,6 +31,3 @@ class RecommendationForm(ModelForm):
             "label": "Email"
         })
     }
-
-
-

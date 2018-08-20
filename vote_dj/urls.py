@@ -8,4 +8,6 @@ urlpatterns = [
     path("messageboard/", include("messageboard.urls")),
     path("api/messageboard/", include("api.urls")),
     path("adopt/", include("adopt.urls")),
+    path("volunteer/", include("volunteer.urls")),
+    path("accounts/", include("allauth.urls")),
 ]

@@ -37,17 +37,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Built in django for template rendering
     'django.contrib.humanize',
+    # Required for allauth site registration
+    'django.contrib.sites',
     # Internal
     "base",
     "vote",
     "maps",
     "messageboard",
     "adopt",
+    "volunteer",
     # External
     "rest_framework",
     'crispy_forms',
+    "allauth", 
+    "allauth.account", 
+    'allauth.socialaccount',
 ]
+
+# Allauth setting
+SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -72,6 +83,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -130,5 +144,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Cripsyform settings
-
 CRISPY_TEMPLATE_PACK = "bootstrap4" 
+
+# Allauth settings
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# Allauth redirects for successful login or logout
+LOGIN_REDIRECT_URL = "/main"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/main"

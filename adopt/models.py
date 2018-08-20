@@ -26,6 +26,8 @@ class Animal(BaseModel):
 class Application(BaseModel):
     pet = models.ForeignKey(Animal, on_delete=models.CASCADE, related_name="pet application"),
     applicant = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50, blank=True)
+    last_name = models.CharField(max_length=50, blank=True)
     street_address = models.CharField(max_length=250)
     street_address_2 = models.CharField(max_length=250)
     state = models.CharField(max_length=2)
