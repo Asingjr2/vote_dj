@@ -42,7 +42,7 @@ class TopicCommentFactory(BaseModelFactory):
     topic = factory.SubFactory(TopicFactory)
     parent = # check against reddit
     user = factory.SubFactory(UserFactory)
-        body = factory.fuzzy.FuzzyText(length=500) # Check if this is the same
+    body = factory.fuzzy.FuzzyText(length=500) # Check if this is the same
 
 
 class TopicVoteFactory(BaseModelFactory):

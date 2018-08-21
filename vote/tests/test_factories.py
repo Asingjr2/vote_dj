@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 
 import factory
 
-from ..factories import ImageFactory, ImageVoteFactory, UserFactory
+from ..factories import ImageFactory, ImageVoteFactory, UserFactory, RecommendationFactory
 
 
 class ImageFactoryTestCase(TestCase):
@@ -21,3 +21,14 @@ class ImageVoteFactoryTestCase(TestCase):
         self.assertIsNotNone(image_vote.image)
         self.assertIsNotNone(image_vote.user)
         self.assertIsNotNone(image_vote.vote)
+
+
+class RecommendationFactoryTestCase(TestCase):
+    def test_factory(self):
+        recommendation = RecommendationFactory()
+
+        self.assertIsNotNone(recommendation.subject)
+        self.assertIsNotNone(recommendation.body)
+        self.assertIsNotNone(recommendation.email)
+        self.assertIsNotNone(recommendation.creator)
+

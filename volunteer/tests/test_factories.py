@@ -9,8 +9,8 @@ class VolunteerJobFactoyTestCase(TestCase):
     def test_factory(self):
         volunteer_job = VolunteerJobFactoy()
 
-    self.assertIsNone(application.location)
-    self.assertIsNone(application.title)
+        self.assertIsNone(application.location)
+        self.assertIsNone(application.title)
 
 
 class VolunteerApplicationFactoryTestCase(TestCase):

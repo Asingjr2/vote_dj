@@ -5,10 +5,12 @@ import factory.fuzzy
 
 from base.factories import BaseModelFactory
 
-from .models import Image,ImageVote
+from .models import Image, ImageVote, Recommendation
 
 
 CHOICES = [-1,1]
+
+
 class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
@@ -33,3 +35,14 @@ class ImageVoteFactory(factory.django.DjangoModelFactory):
     image = factory.SubFactory(ImageFactory)
     user = factory.SubFactory(UserFactory)
     vote = factory.fuzzy.FuzzyChoice(CHOICES)
+
+
+class RecommendationFactory(BaseModelFactory):
+    class Meta: 
+        model = Recommendation
+
+    subject = factory.fuzzy.FuzzyText(length=100)
+    body = factory.fuzzy.FuzzyText(length=250) # need to check against reddit
+    email = # need to check factory boy site
+    creator = factory.SubFactory(UserFactory)
+
