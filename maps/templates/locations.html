@@ -8,12 +8,13 @@
 <section id="white">
     <div class="container" >
         <div id="floating-panel">
-            <input type="text" name="start" id="start" placeholder="start point">
-            <select name="end" id="end">
+            <input class="form-control" type="text" name="start" id="start" placeholder="start point">
+            <select name="end" id="end" class="form-control ">
                 {% for place in locations %}
                 <option value="{{ place }} ">{{ place }}</option>
                 {% endfor %}
             </select>
+            <button id="get-route" class="btn btn-info">Get Route</button>
         </div>
         <div id="right-panel"></div>
         <div id="map"></div>

@@ -1,38 +1,32 @@
-// Function that reads field data
   function initMap() {
     var display = new google.maps.DirectionsRenderer;
     var service = new google.maps.DirectionsService;
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom:15,
-      center: {lat: 41.85, lng: -87.65}
+      center: {lat: 38.83, lng: -77.10},
+      mapTypeControl: false
     });  
     display.setMap(map);
     display.setPanel(document.getElementById("right-panel"));
-
-    var Woodbride_DP = new google.maps.Marker({
-      position: {lat: 41.85, lng: -87.67},
-      map: map,
-      title: 'Woodbridge'
-    });
   
     var Alexandria_DP = new google.maps.Marker({
-      position: {lat: 41.85, lng: -87.69},
+      position: {lat: 38.83, lng: -77.10},
       map: map,
-      title: 'Alexandria'
+      title: 'Adopt a Friend HQ'
     });
   
   
     var control = document.getElementById("floating-panel");
     control.style.display = "block";
   
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(control);
   
     var onChange = function(){
       calculateAndDisplay(service, display);
-    };  
-  
-    document.getElementById("start").addEventListener("change", onChange);
-    document.getElementById("end").addEventListener("change", onChange);
+    }; 
+    document.getElementById("get-route").addEventListener("click", onChange)
+    // document.getElementById("start").addEventListener("change", onChange);
+    // document.getElementById("end").addEventListener("change", onChange);
   }  
 
 function calculateAndDisplay(service, display){
@@ -40,6 +34,7 @@ function calculateAndDisplay(service, display){
   var end = document.getElementById("end").value;
   console.log(start.length);
   console.log(end.lenth);
+  console.log("fetching route")
     service.route({
       origin: start, 
       destination: end,
@@ -52,4 +47,3 @@ function calculateAndDisplay(service, display){
       }
     });
   }
-
