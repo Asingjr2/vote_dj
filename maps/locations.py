@@ -3,7 +3,9 @@ current_locations = {
     "WoodBridge":"15875 Neabsco Rd Woodbridge, VA 22191", 
     "Arlington":"Arlington National Cemetery, Arlington, VA 22211",
     "Balston":"671 N Glebe Rd, Arlington, VA 22203",
-    "Springfield":"6500 Springfield Mall, Springfield, VA 22150"
+    "Springfield":"6500 Springfield Mall, Springfield, VA 22150",
+    "Washington, DC_1": " 2 Lincoln Memorial Cir NW, Washington, DC 20037",
+    "Washington, DC_2": "701 E Basin Dr SW, Washington, DC 20242"
 }
 
 

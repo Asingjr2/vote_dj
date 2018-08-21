@@ -5,12 +5,47 @@
     <link rel="stylesheet" href="{% static 'maps/css/park_style.css' %}">
 {% endblock %}
 {% block body %}
-<div>
-    <div id="map_section">
-        <div id="map"></div>
-    </div>
-    <div class="row">
-        <div id="bottom-panel"></div>
+<div id="mt">
+    <div class="row" >
+
+        <div class="col-67" id="map_section">
+            <div id="map"></div>
+        </div>
+        <div class="col-4">
+            <div id="right-panel">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h6>Location: Alexandria</h6>
+                        <p>Address: 4401 W Braddock Rd, Alexandria, VA 22304"</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Location: WoodBridge</h6>
+                        <p>Address: 15875 Neabsco Rd Woodbridge, VA 22191"</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Location: Arlington</h6>
+                        <p>Address: Arlington National Cemetery, Arlington, VA 22211"</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Location: Balston</h6>
+                        <p>Address: 671 N Glebe Rd, Arlington, VA 22203"</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Location: Springfield</h6>
+                        <p>Address: 6500 Springfield Mall, Springfield, VA 22150"</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Location: Washington, DC</h6>
+                        <p>Address: 2 Lincoln Memorial Cir NW, Washington, DC 20037"</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Location: Washington, DC</h6>
+                        <p>Address: 701 E Basin Dr SW, Washington, DC 20242"</p>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
     </div>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqau3bClOAWzm_pS8qhlVBtDAbFHrzSCQ&callback=initMap">

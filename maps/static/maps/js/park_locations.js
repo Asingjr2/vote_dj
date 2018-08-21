@@ -38,5 +38,17 @@ function initMap() {
     map: map,
     title: 'Springfield Dog Park'
   });
+
+  var Washington_DP1 = new google.maps.Marker({
+    position: {lat: 38.88, lng: -77.05},
+    map: map,
+    title: 'Washington Dog Park'
+  });
+
+  var Washington_DP2 = new google.maps.Marker({
+    position: {lat: 38.87, lng: -77.03},
+    map: map,
+    title: 'Washington Dog Park'
+  });
  
   }
