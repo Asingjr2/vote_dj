@@ -4,6 +4,7 @@ import factory
 
 from ..factories import ImageFactory, ImageVoteFactory, UserFactory
 
+
 class ImageFactoryTestCase(TestCase):
     def test_factory(self):
         image = ImageFactory()
