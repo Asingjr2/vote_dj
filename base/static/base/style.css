@@ -2,9 +2,7 @@
     background-color: rgb(250, 216, 62);
     min-height: 660px;
 }
-#base_color:hover{
-    color: rgb(250, 216, 62) !important;
-}
+
 #info_container{
     background-color:white;
     min-height:920px;

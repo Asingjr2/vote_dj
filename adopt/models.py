@@ -12,15 +12,29 @@ AGE_RANGES = (
     ("5-10 YEARS", "5-10 YEARS"), 
     ("10 YEARS OR OLDER", "10 YEARS OR OLDER"))
 
+GENDER = (
+    ("male", "MALE"), 
+    ("female", "FEMALE")
+)
+
+ANIMAL_TYPE = (
+    ("dog", "DOG"), 
+    ("cat", "CAT"),
+    ("other", "OTHER")
+)
+
 
 class Animal(BaseModel):
     name = models.CharField(max_length=100)
-    age = models.CharField(max_length=15, choices=AGE_RANGES)
-    breed = models.CharField(max_length=100)
+    age = models.CharField(max_length=20, choices=AGE_RANGES)
+    gender = models.CharField(max_length=10, choices=GENDER, default="male")
+    animal_type = models.CharField(max_length=10, choices=ANIMAL_TYPE, default="dog")
+    breed = models.CharField(max_length=100, blank=True, null=True)
+    picture = models.CharField(max_length=250, blank=True, null=True)
     description = models.TextField(validators=[MaxLengthValidator(250), MinLengthValidator(10)])
 
     def __str__(self):
-        return "Name {}, Breed {}".format(self.name, self.breed)
+        return "Name {}, Type {}".format(self.name, self.animal_type)
 
 
 class Application(BaseModel):
@@ -38,8 +52,8 @@ class Application(BaseModel):
     pets_other = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)])
     interest_reason = models.TextField(validators=[MaxLengthValidator(250), MinLengthValidator(10)])
     email = models.EmailField(validators = [EmailValidator()])
-    contact_number = models.IntegerField(validators=[MinValueValidator(1000000000), MaxLengthValidator(9999999999)])
+    contact_number = models.IntegerField(validators=[MinValueValidator(1000000000), MaxLengthValidator(9999999999)], blank=True, null=True)
 
     def __str__(self):
-        return "{} applying for {}".format(self.applicant.username, self.pet.name)
+        return "{} applying for {}".format(self.applicant, self.pet)
 
