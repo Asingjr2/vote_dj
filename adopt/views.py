@@ -2,18 +2,18 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import DeleteView, CreateView
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 from .forms import ApplicationForm
 from .models import Animal, Application
 
 # Create your views here.
-class AdoptFormView(TemplateView):
-    template_name = "adopt/adopt_form.html"
 
-    def get_context_data(self, **kwargs):
-        context = super(AdoptFormView, self).get_context_data(**kwargs)
-        context["form"] = ApplicationForm()
-        return context
+class AdoptHomeView(TemplateView):
+    template_name = "adopt/adopt_home.html"
 
 
 class AnimalListing(ListView):
@@ -67,3 +67,29 @@ class OtherAnimalListing(ListView):
         return context
 
 
+class AdoptFormView(CreateView):
+    template_name = "adopt/adopt_form.html"
+    model = Application
+    success_url = reverse_lazy("adopt:adopt_all")
+    form_class = ApplicationForm
+    # fields = ["first_name", "last_name","street_address", "email", "contact_number" ]
+
+    def get_context_data(self, **kwargs):
+        context = super(AdoptFormView, self).get_context_data(**kwargs)
+        context["form"] = ApplicationForm()
+        url = self.request.path_info
+        pet_id = url.replace("adopt/adopt_form/", "").replace("/", "")
+        self.request.session["current_pet_id"] = pet_id
+        context["pet_name"] = Animal.objects.get(id=pet_id).name
+        context["pet_id"] = self.request.session["current_pet_id"] 
+        return context
+
+    def form_valid(self, form):
+        form.instance.pet = Animal.objects.get(id=self.request.session["current_pet_id"])
+        self.object = form.save()
+        return HttpResponseRedirect(reverse_lazy("adopt:addopt_all"))
+    
+    def form_invalid(self, form):
+        print("something happened", form.non_field_errors)
+        messages.warning(self.request, 'Something went wrong!  Please try again')
+        return HttpResponseRedirect(reverse_lazy("adopt:adopt_form", args=[self.request.session["current_pet_id"]]))

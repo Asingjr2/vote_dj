@@ -12,4 +12,4 @@ class ApplicationForm(ModelForm):
 
     class Meta:
         model = Application
-        exclude = ("pets", "applicant")
+        exclude = ("pets",)
