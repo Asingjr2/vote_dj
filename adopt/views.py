@@ -10,11 +10,6 @@ from django.contrib import messages
 from .forms import ApplicationForm
 from .models import Animal, Application
 
-# Create your views here.
-
-class AdoptHomeView(TemplateView):
-    template_name = "adopt/adopt_home.html"
-
 
 class AnimalListing(ListView):
     template_name = "adopt/animal_listing.html"
@@ -72,24 +67,56 @@ class AdoptFormView(CreateView):
     model = Application
     success_url = reverse_lazy("adopt:adopt_all")
     form_class = ApplicationForm
-    # fields = ["first_name", "last_name","street_address", "email", "contact_number" ]
+    # fields = ["first_name", "last_name","street_address", "street_address_2", "family_size", "pets_doemail", "contact_number" ]
 
     def get_context_data(self, **kwargs):
         context = super(AdoptFormView, self).get_context_data(**kwargs)
-        context["form"] = ApplicationForm()
+        context["form"] = ApplicationForm(self.request.POST or None)
         url = self.request.path_info
         pet_id = url.replace("adopt/adopt_form/", "").replace("/", "")
         self.request.session["current_pet_id"] = pet_id
         context["pet_name"] = Animal.objects.get(id=pet_id).name
         context["pet_id"] = self.request.session["current_pet_id"] 
+        # context["form2"] = ApplicationForm(self.request.POST)
         return context
 
     def form_valid(self, form):
         form.instance.pet = Animal.objects.get(id=self.request.session["current_pet_id"])
         self.object = form.save()
-        return HttpResponseRedirect(reverse_lazy("adopt:addopt_all"))
+        return HttpResponseRedirect(reverse_lazy("adopt:adopt_all"))
     
     def form_invalid(self, form):
         print("something happened", form.non_field_errors)
-        messages.warning(self.request, 'Something went wrong!  Please try again')
+        if "first_name" in form.errors:
+            messages.warning(self.request, 'First name must be between 1 and 50 characters')
+        if "last_name" in form.errors:
+            messages.warning(self.request, 'Last name must be between 1 and 50 characters')
+        if "street_address" in form.errors:
+            messages.warning(self.request, 'Street address line 1 must be between 5 and 250 characters')
+        if "street_address_2" in form.errors:
+            messages.warning(self.request, 'Steert address line 2 must be between 5 and 250 characters')
+        if "state" in form.errors:
+            messages.warning(self.request, 'State must be between 2 characters')
+        if "family_size" in form.errors:
+            messages.warning(self.request, 'Family size must be be between 1 and 10')
+        if "pets_dogs" in form.errors:
+            messages.warning(self.request, 'Number of dogs must be between 0 and 5')
+        if "pets_cats" in form.errors:
+            messages.warning(self.request, 'Number of cats must be between 0 and 4')
+        if "pets_other" in form.errors:
+            messages.warning(self.request, 'Number of dogs must be between 0 and 5')
+        if "interest_reason" in form.errors:
+            messages.warning(self.request, 'Reason for interest must be between 5 and 250 characters')
+        if "email" in form.errors:
+            messages.warning(self.request, 'Must be valid email')
+        if "contact_number" in form.errors:
+            messages.warning(self.request, 'Contact number must be 10 digits')
+        form2 = ApplicationForm(self.request.POST)
+        context = {
+            "form":form2
+        }
+        return render(self.request, "adopt/adopt_form.html", context)
+
+
+
         return HttpResponseRedirect(reverse_lazy("adopt:adopt_form", args=[self.request.session["current_pet_id"]]))

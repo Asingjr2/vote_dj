@@ -9,7 +9,7 @@
     </h1>
     <form method="post" id="volunteer-form">
         {% csrf_token %}
-        {{ form |crispy  }}
+        {{ form | crispy  }}
         <button class="btn btn-success" >Submit</button>
     </form>
 </div>

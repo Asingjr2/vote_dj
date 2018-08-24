@@ -4,8 +4,23 @@
 {% load crispy_forms_tags %}
 {% block body %}
 <div>
-    <h1>ADOPT FORM PAGE</h1>
-    <form action="" method="post">
+    <h1>LET's ADOPT {{ current_pet }}</h1>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <!-- <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form2 | crispy  }}
+            <button class="btn btn-success">SUBMIT APPLICATION</button>
+        </form>
+    </div> -->
+    <form method="post">
         {% csrf_token %}
         {{ form | crispy  }}
         <button class="btn btn-success">SUBMIT APPLICATION</button>

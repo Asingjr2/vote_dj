@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'adopt/style.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid" >
+
+    <ul class="nav nav-pills nav-fill" >
+      <li class="nav-item" id="white">
+        <a class="nav-link" href="{% url 'adopt:adopt_all' %}">ALL
+          <span class="badge"><p>{{ all }}</p></span>
+          
+        </a>
+      </li>
+      <li class="nav-item" id="white">
+        <a class="nav-link" href="{% url 'adopt:adopt_dogs' %}">DOGS
+          <span class="badge"><p>{{ dogs }}</p></span>
+        </a>
+      </li>
+      <li class="nav-item" id="white">
+        <a class="nav-link" href="{% url 'adopt:adopt_cats' %}">CATS
+          <span class="badge"><p>{{ cats }}</p></span>
+        </a>
+      </li>
+      <li class="nav-item" id="white">
+        <a class="nav-link" href="{% url 'adopt:adopt_other' %}">OTHER
+          <span class="badge"><p>{{ other }}</p></span>
+        </a>
+      </li>
+    </ul>
+    
+    {% for animal in object_list %}
+    <div class="row" id="border">
+      <div class="col-3">
+        <img id="pic-left" src="{{ animal.picture }}" alt="picture of {{ animal.breed }}">
+      </div>
+
+      <div class="col-5">
+          <h5 class="list-group-item">Name: {{ animal.name }}
+            <span class="badge" id="floatR">
+              <a href="{% url 'adopt:adopt_form' animal.id %}">ADOPT</a>
+            </span>
+          </h5>
+          <div class="list-group-item">
+            <p>Gender: {{ animal.gender }}</p>
+            <p> Breed: {{ animal.breed }}</p>
+            <p>Description: {{ animal.description }}</p>
+          </div>
+        </div>
+
+      <div class="col-3">
+        <img id="pic-left" src="{{ animal.picture }}" alt="picture of {{ animal.breed }}">
+      </div>
+    </div>
+    {% endfor %}
+</div>
+  
+  
+  
+  {% endblock %}
+  
