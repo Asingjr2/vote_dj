@@ -85,18 +85,6 @@ class TopicComment(BaseModel):
         validators=[MaxLengthValidator(500)]
     )
 
-    # @property
-    # def upvotes(self):
-    #     return self.votes.filter(vote=UPVOTE).count()
-
-    # @property
-    # def downvotes(self):
-    #     return self.votes.filter(vote=DOWNVOTE).count()
-
-    # @property
-    # def score(self):
-    #     return self.votes.all().aggregate(models.db.Sum('vote'))
-
     def __str__(self):
         return '{}: {}'.format(self.user, self.body[:10])
 

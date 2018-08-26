@@ -7,13 +7,7 @@ from ..factories import ImageFactory, ImageVoteFactory, UserFactory
 
 
 class HomeViewTest(TestCase):
-    def test_200(self):
-        url = reverse("home")
-
-        client = Client()
-        response = client.get(url)
-        self.assertEqual(response.status_code, 200)
-
+    pass
 
 class ImageDetailViewTestCase(TestCase):
     pass

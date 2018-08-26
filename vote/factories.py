@@ -11,7 +11,7 @@ from .models import Image, ImageVote, Recommendation
 CHOICES = [-1,1]
 
 
-class UserFactory(factory.django.DjangoModelFactory):
+class UserFactory(BaseModelFactory):
     class Meta:
         model = User
     
@@ -19,7 +19,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     password = factory.fuzzy.FuzzyText(length=10)
 
 
-class ImageFactory(factory.django.DjangoModelFactory):
+class ImageFactory(BaseModelFactory):
     class Meta:
         model = Image
 
@@ -28,7 +28,7 @@ class ImageFactory(factory.django.DjangoModelFactory):
     creator = factory.SubFactory(UserFactory)
 
 
-class ImageVoteFactory(factory.django.DjangoModelFactory):
+class ImageVoteFactory(BaseModelFactory):
     class Meta:
         model = ImageVote
 
@@ -42,7 +42,7 @@ class RecommendationFactory(BaseModelFactory):
         model = Recommendation
 
     subject = factory.fuzzy.FuzzyText(length=100)
-    body = factory.fuzzy.FuzzyText(length=250) # need to check against reddit
-    email = # need to check factory boy site
+    body = factory.fuzzy.FuzzyText(length=250)
+    email = factory.fuzzy.FuzzyText(length=250)
     creator = factory.SubFactory(UserFactory)
 

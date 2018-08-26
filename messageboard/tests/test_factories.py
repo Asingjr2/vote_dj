@@ -22,7 +22,6 @@ class TopicFactoryTestCase(TestCase):
         self.assertIsNotNone(topic.forum)
         self.assertIsNotNone(topic.user)
         self.assertIsNotNone(topic.title)
-        self.assertIsNotNone(topic.slug)
         self.assertIsNotNone(topic.body)
 
 
@@ -40,6 +39,5 @@ class TopicCommentFactoryTestCase(TestCase):
         comment = TopicCommentFactory()
     
         self.assertIsNotNone(comment.topic)
-        self.assertIsNotNone(comment.parent)### Check against reddit
         self.assertIsNotNone(comment.user)
         self.assertIsNotNone(comment.body)

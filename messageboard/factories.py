@@ -10,18 +10,14 @@ from .models import Forum, Topic, TopicVote, TopicComment
 
 UPVOTE = 1
 DOWNVOTE = -1
-VOTE_CHOICES = (
-    (UPVOTE, '+1'),
-    (DOWNVOTE, '-1')
-)
+VOTE_CHOICES = [-1,1]
 
 
 class ForumFactory(BaseModelFactory):
     class Meta:
         model = Forum
 
-    slug = # need factory equivalent of slug
-    moderators = factory.SubFactory(UserFactory)
+    slug = factory.Sequence(lambda n: 'forum-{}'.format(n))
 
 
 class TopicFactory(BaseModelFactory):
@@ -31,8 +27,7 @@ class TopicFactory(BaseModelFactory):
     forum = factory.SubFactory(ForumFactory)
     user = factory.SubFactory(UserFactory)
     title = factory.fuzzy.FuzzyText(length=100)
-    slug = # need to figure out how to handle
-    body = factory.fuzzy.FuzzyText(length=300) # Check if this is the same
+    body = factory.fuzzy.FuzzyText(length=300) 
 
 
 class TopicCommentFactory(BaseModelFactory):
@@ -40,9 +35,8 @@ class TopicCommentFactory(BaseModelFactory):
         model = TopicComment
     
     topic = factory.SubFactory(TopicFactory)
-    parent = # check against reddit
     user = factory.SubFactory(UserFactory)
-    body = factory.fuzzy.FuzzyText(length=500) # Check if this is the same
+    body = factory.fuzzy.FuzzyText(length=500) 
 
 
 class TopicVoteFactory(BaseModelFactory):

@@ -2,26 +2,26 @@ from django.test import TestCase, Client
 
 import factory
 
-from ..factories import VolunteerApplicationFactory, VolunteerJobFactoy
+from ..factories import VolunteerApplicationFactory, VolunteerJobFactory
 
 
 class VolunteerJobFactoyTestCase(TestCase):
     def test_factory(self):
-        volunteer_job = VolunteerJobFactoy()
+        volunteer_job = VolunteerJobFactory()
 
-        self.assertIsNone(application.location)
-        self.assertIsNone(application.title)
+        self.assertIsNotNone(volunteer_job.location)
+        self.assertIsNotNone(volunteer_job.title)
+        self.assertIsNotNone(volunteer_job.hours)
 
 
 class VolunteerApplicationFactoryTestCase(TestCase):
     def test_factory(self):
         application = VolunteerApplicationFactory()
+        new_job = VolunteerJobFactory()
 
-    self.assertIsNone(application.job)
-    self.assertIsNone(application.first_name)
-    self.assertIsNone(application.last_name)
-    self.assertIsNone(application.about_you)
-
-    # Compare with factory
-    self.assertIsNone(application.email)
-    self.assertIsNone(application.contact_number)
+        self.assertIsNotNone(application.job)
+        self.assertIsNotNone(application.first_name)
+        self.assertIsNotNone(application.last_name)
+        self.assertIsNotNone(application.about_you)
+        self.assertIsNotNone(application.email)
+        self.assertIsNotNone(application.contact_number)

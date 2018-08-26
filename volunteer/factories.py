@@ -22,7 +22,7 @@ HOURS = (
 )
 
 
-class VolunteerJobFactoy(factory.django.DjangoModelFactory):
+class VolunteerJobFactory(BaseModelFactory):
     class Meta:
         model = VolunteerJob
 
@@ -31,13 +31,13 @@ class VolunteerJobFactoy(factory.django.DjangoModelFactory):
     hours = factory.fuzzy.FuzzyChoice(HOURS)
 
 
-class VolunteerApplicationFactory(factory.django.DjangoModelFactory):
+class VolunteerApplicationFactory(BaseModelFactory):
     class Meta:
         model = VolunteerApplication
 
-    job = factory.SubFactory(VolunteerJobFactoy)
+    # job = factory.SubFactory(VolunteerJobFactory)
     first_name = factory.fuzzy.FuzzyText(length=50)
     last_name = factory.fuzzy.FuzzyText(length=50)
     about_you = factory.fuzzy.FuzzyText(length=50)
-
-    ### Need email, contact, and double check about you
+    email = factory.fuzzy.FuzzyText(length=50)
+    contact_number = factory.fuzzy.FuzzyInteger(1000000000, 9999999999)

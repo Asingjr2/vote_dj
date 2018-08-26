@@ -1,12 +1,21 @@
 {% extends 'layout.html' %}
 
 {% load staticfiles %}
+
 {% block extra_style %}
-    <link rel="stylesheet" href="{% static 'maps/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'maps/css/directions_style.css' %}">
 {% endblock %}
+
 {% block body %}
 <section id="white">
     <div class="container" >
+        <div class="row">
+            <div class="col">
+                <button class="btn " id="floatR">
+                    <a href="{% url 'locations:home' %}">REFRESH MAP</a>
+                </button>
+            </div>
+        </div>
         <div id="floating-panel">
             <input class="form-control" type="text" name="start" id="start" placeholder="start point">
             <select name="end" id="end" class="form-control ">
@@ -24,6 +33,7 @@
     </div>    
 </section>
 {% endblock %}
+
 {% block extra_js %}
     <script src="{% static 'maps/js/directions.js' %}"></script>
 {% endblock %}
