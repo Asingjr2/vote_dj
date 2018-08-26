@@ -116,7 +116,3 @@ class AdoptFormView(CreateView):
             "form":form2
         }
         return render(self.request, "adopt/adopt_form.html", context)
-
-
-
-        return HttpResponseRedirect(reverse_lazy("adopt:adopt_form", args=[self.request.session["current_pet_id"]]))

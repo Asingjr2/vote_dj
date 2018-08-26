@@ -50,9 +50,3 @@ class VolunteerApplicationFormView(CreateView):
         print("something happened", form.non_field_errors)
         messages.warning(self.request, 'Something went wrong!  Please try again')
         return HttpResponseRedirect(reverse("volunteer:jobs_listing"))
-
-
-class VolunteerFormCompleteView(TemplateView):
-    template_name = "volunteer/volunteer_form_complete.html"
-
-
