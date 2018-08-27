@@ -8,7 +8,8 @@ from django.views import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 
-from .models import Image, ImageVote,UPVOTE, DOWNVOTE, Recommendation  
+from .models import Image, ImageVote,UPVOTE, DOWNVOTE, Recommendation
+from adopt.models import Animal
 from .forms import RecommendationForm
 from messageboard.models import Forum
 
@@ -20,6 +21,9 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         context["day"] = "holmes"
         context["image"] = Image.objects.last()
+        context["animal"] = Animal.objects.get(name="Spike")
+        context["animal2"] = Animal.objects.first()
+        context["animal3"] = Animal.objects.last()
         return context
 
 
@@ -51,16 +55,6 @@ class ContactUsView(CreateView):
         context = super(ContactUsView, self).get_context_data(**kwargs)
         context["form2"] = RecommendationForm
         return context
-
-
-class ImageDetailView(DetailView):
-    model = Image
-    pk_url_kwarg = 'pk'
-
-
-class ImageDeleteView(DeleteView):
-    model = Image
-    success_url = reverse_lazy("home")
 
 
 class ImageUpvoteView(View):

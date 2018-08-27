@@ -138,7 +138,6 @@ class TopicDownvoteView(LoginRequiredMixin, View):
 
 
 class TopicCommentCreateView(LoginRequiredMixin, View):
-    
     def post(self, request):
         form = TopicCommentCreateForm(request.POST)
         if form.is_valid():
@@ -150,4 +149,6 @@ class TopicCommentCreateView(LoginRequiredMixin, View):
             new_topic_comment.save()
             current_topic = Topic.objects.get(id=request.POST["topic_id"])
             print(request.POST["topic_id"])
+
+        # Redirecting back to previous page
         return redirect("/messageboard/{}/{}/{}".format(current_topic.forum.slug, current_topic.id,            current_topic.slug,))
