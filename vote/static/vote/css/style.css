@@ -1,7 +1,6 @@
 #main{
     height:350;
     background-color: white;
-    padding: 10 0 10 0;
     border-bottom: 5px ridge rgb(250, 216, 62);
 }
 #tall{
@@ -16,8 +15,11 @@
 .card form {
     display: inline-block;
 }
-.carousel-item img{
-    height: 100%;
+.carousel-inner img{
+    height: 80%;
+    width: 200px;
+    object-fit: fill;
+    margin-top:25px;
 }
 #body_div{
     width:50%;
@@ -44,4 +46,13 @@
 }
 .marginB{
     margin-bottom:15px;
+}
+#edge{
+    border-radius:25px;
+    margin-top:25px;
+}
+#special-image{
+    height:300px;
+    width:450px;
+    margin-bottom:25px;
 }

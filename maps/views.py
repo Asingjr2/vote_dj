@@ -23,15 +23,6 @@ class MapHomeView(View):
 
         url = "https://maps.googleapis.com/maps/api/directions/json?origin={}&destination={}&key={}".format(request.session["origin"], request.session["destination"], KEY )
 
-        # resp = requests.get(url)
-        # resp = requests.get(url)
-        # print(resp.status_code)
-        # print(resp)
-        # print(resp.text)
-        # print(resp.json())
-        # print(url)
-
-        # return render(request, "index.html", {"url":url, "embed_url":embed_url, "locations":locations})
         return render(request, "locations.html", {"url":url, "embed_url":embed_url, "locations":locations})
 
     def post(self, request):
@@ -42,7 +33,6 @@ class MapHomeView(View):
             request.session["route"] = 1
         if "origin" in request.session:
             print("form does not look good")
-        return redirect("/locations")
         return redirect("/locations")
 
 

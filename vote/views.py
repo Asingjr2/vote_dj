@@ -22,7 +22,7 @@ class HomeView(TemplateView):
         context["day"] = "holmes"
         context["image"] = Image.objects.last()
         context["animal"] = Animal.objects.get(name="Spike")
-        context["animal2"] = Animal.objects.first()
+        context["animal2"] = Animal.objects.get(name="Tabatha")
         context["animal3"] = Animal.objects.last()
         return context
 
@@ -34,9 +34,6 @@ class ContactUsView(CreateView):
     template_name = "vote/contact.html"
 
     def form_valid(self, form):
-        print("form looks good")
-        # if self.request.user:
-            # form.instance.creator = self.request.user
         self.object = form.save()
         return redirect("home")
 
@@ -55,54 +52,3 @@ class ContactUsView(CreateView):
         context = super(ContactUsView, self).get_context_data(**kwargs)
         context["form2"] = RecommendationForm
         return context
-
-
-class ImageUpvoteView(View):
-    def post(self, request, *args, **kwargs):
-        image = get_object_or_404(Image, id=self.kwargs.get("pk"))
-
-        try:
-            image_vote = ImageVote.objects.get(user=self.request.user, 
-            image=image)
-            image_vote.vote = UPVOTE
-            image_vote.save()
-            print("success")
-        except ImageVote.DoesNotExist:
-            print("failure")
-            _= ImageVote.objects.create(
-                image=image, 
-                user=self.request.user,
-                vote=UPVOTE
-            )
-        return redirect("home")
-
-    
-class ImageDownvoteView(View):
-    def post(self, request, *args, **kwargs):
-        image = get_object_or_404(Image, id=self.kwargs.get("pk"))
-
-        try:
-            image_vote = ImageVote.objects.get(user=self.request.user, 
-            image=image)
-            image_vote.vote = DOWNVOTE
-            image_vote.save()
-            print("success")
-        except ImageVote.DoesNotExist:
-            print("failure")
-            _= ImageVote.objects.create(
-                image=image, 
-                user=self.request.user,
-                vote=UPVOTE
-            )
-        return redirect("home")
-
-
-######TEST
-class TestView(TemplateView):
-    template_name = "vote/test.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(TestView, self).get_context_data(**kwargs)
-        context["all_forums"] = Forum.objects.all()
-        return context
-############

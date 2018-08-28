@@ -1,8 +1,10 @@
 #main_container{
-    background-color: rgb(250, 216, 62);
-    min-height: 660px;
+    background-image: linear-gradient(white, rgb(250, 216, 62));
+    height:100%;
 }
-
+#body-container{
+    max-height: 100%;
+}
 #info_container{
     background-color:white;
     min-height:920px;

@@ -36,6 +36,7 @@ class VolunteerApplicationFormView(CreateView):
         context["form"] = VolunteerApplicationForm()
         url = self.request.path_info
         job_id = url.replace("volunteer/apply/", "").replace("/", "")
+        context["current_job"] = VolunteerJob.objects.get(id=job_id)
         self.request.session["current_job_id"] = job_id
         print(self.request.session["current_job_id"])
         return context

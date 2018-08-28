@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 
 {% load staticfiles %}
+
 {% load crispy_forms_tags %}
+
 {% block body %}
 <div>
     <h1>
-        VOLUNTEER
+        Volunteering for {{ current_job.title }} in {{ current_job.location }}
     </h1>
     <form method="post" id="volunteer-form">
         {% csrf_token %}
@@ -14,6 +16,7 @@
     </form>
 </div>
 {% endblock %}
+
 {% block extra_js %}
     <script type="text/javascript" src="{% static 'volunteer/jquery_job.js' %}"></script>
 {% endblock %}

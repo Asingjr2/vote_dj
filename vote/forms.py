@@ -22,12 +22,13 @@ class RecommendationForm(ModelForm):
         }), 
         "body": forms.Textarea(attrs = {
             "class": "form-control",
-            "label": "",
+            "label": "message",
             "placeholder": "Add new message", 
             "maxLength":"250", 
         }), 
         "email":forms.EmailInput(attrs= {
             "class": "form-control",
-            "label": "Email"
+            "label": "Email",
+            "placeholder": "Enter valid email" 
         })
     }

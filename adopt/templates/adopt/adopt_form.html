@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 
 {% load staticfiles %}
+
 {% load crispy_forms_tags %}
+
 {% block body %}
 <div>
-    <h1>LET's ADOPT {{ current_pet }}</h1>
+    <h1>LET's ADOPT {{ pet_name }}</h1>
 
     {% if messages %}
     <ul class="messages">
@@ -13,13 +15,7 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <!-- <div>
-        <form method="post">
-            {% csrf_token %}
-            {{ form2 | crispy  }}
-            <button class="btn btn-success">SUBMIT APPLICATION</button>
-        </form>
-    </div> -->
+
     <form method="post">
         {% csrf_token %}
         {{ form | crispy  }}

@@ -29,6 +29,9 @@ class AnimalListing(ListView):
     def get_context_data(self, **kwargs):
         context = super(AnimalListing, self).get_context_data(**kwargs)
         context["all"] = Animal.objects.all().count()
+        context["dogs"] = Animal.objects.filter(animal_type="dog").count()
+        context["cats"] = Animal.objects.filter(animal_type="cat").count()
+        context["other"] = Animal.objects.filter(animal_type="other").count()
         return context
 
 
@@ -38,7 +41,10 @@ class DogListing(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(DogListing, self).get_context_data(**kwargs)
+        context["all"] = Animal.objects.all().count()
         context["dogs"] = Animal.objects.filter(animal_type="dog").count()
+        context["cats"] = Animal.objects.filter(animal_type="cat").count()
+        context["other"] = Animal.objects.filter(animal_type="other").count()
         return context
 
 
@@ -48,7 +54,10 @@ class CatListing(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CatListing, self).get_context_data(**kwargs)
+        context["all"] = Animal.objects.all().count()
+        context["dogs"] = Animal.objects.filter(animal_type="dog").count()
         context["cats"] = Animal.objects.filter(animal_type="cat").count()
+        context["other"] = Animal.objects.filter(animal_type="other").count()
         return context
 
 
@@ -58,6 +67,9 @@ class OtherAnimalListing(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(OtherAnimalListing, self).get_context_data(**kwargs)
+        context["all"] = Animal.objects.all().count()
+        context["dogs"] = Animal.objects.filter(animal_type="dog").count()
+        context["cats"] = Animal.objects.filter(animal_type="cat").count()
         context["other"] = Animal.objects.filter(animal_type="other").count()
         return context
 

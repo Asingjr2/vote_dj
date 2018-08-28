@@ -11,24 +11,24 @@
 
     <ul class="nav nav-pills nav-fill" >
       <li class="nav-item" id="white">
-        <a class="nav-link" href="{% url 'adopt:adopt_all' %}">ALL
-          <span class="badge"><p>{{ all }}</p></span>
+        <a class="nav-link" id="special" href="{% url 'adopt:adopt_all' %}">ALL
+          <span class="badge"><p id="animal-count">{{ all }}</p></span>
           
         </a>
       </li>
       <li class="nav-item" id="white">
         <a class="nav-link" href="{% url 'adopt:adopt_dogs' %}">DOGS
-          <span class="badge"><p>{{ dogs }}</p></span>
+          <span class="badge"><p id="animal-count">{{ dogs }}</p></span>
         </a>
       </li>
       <li class="nav-item" id="white">
         <a class="nav-link" href="{% url 'adopt:adopt_cats' %}">CATS
-          <span class="badge"><p>{{ cats }}</p></span>
+          <span class="badge"><p id="animal-count">{{ cats }}</p></span>
         </a>
       </li>
       <li class="nav-item" id="white">
         <a class="nav-link" href="{% url 'adopt:adopt_other' %}">OTHER
-          <span class="badge"><p>{{ other }}</p></span>
+          <span class="badge"><p id="animal-count">{{ other }}</p></span>
         </a>
       </li>
     </ul>
@@ -53,13 +53,11 @@
         </div>
 
       <div class="col-3">
-        <img id="pic-left" src="{{ animal.picture }}" alt="picture of {{ animal.breed }}">
+        <img id="pic-right" src="{{ animal.picture }}" alt="picture of {{ animal.breed }}">
       </div>
     </div>
     {% endfor %}
 </div>
-  
-  
   
   {% endblock %}
   

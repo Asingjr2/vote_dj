@@ -13,43 +13,39 @@
     <h1 class="pill">{{ object.title }}</h1>
     <br>
 
-{% if object.topiccomment_set.all.count < 1 %}
-    <div class="" id="">
-        <h1>Be the first to comment on topic: {{ object.title | upper }}</h1>
-        <form action="{% url 'messageboard:topic_comment_create' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="topic_id" value="{{ object.id }}">
-            <input type="hidden" name="topic_slug" value="{{ object.slug }}">
-            <input type="hidden" name="user" value="{{ object.creator.id }} ">
-            {{ topic_comment_form.as_p }}
-            <button class="btn btn-succcess">ADD COMMENT</button>
-        </form>
-    </div>
-{% else %}
-    {% for comment in object.topiccomment_set.all %}
-    <div class="container" >
-        <div id="light_blue">
-            <h5>created by:{{ comment.user.username }} on {{ comment.created_at }}</h5>
-            <p> {{ comment.body }}</p>
+    {% if object.topiccomment_set.all.count < 1 %}
+        <div class="" id="">
+            <h1>Be the first to comment on topic: {{ object.title | upper }}</h1>
+            <form action="{% url 'messageboard:topic_comment_create' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="topic_id" value="{{ object.id }}">
+                <input type="hidden" name="topic_slug" value="{{ object.slug }}">
+                <input type="hidden" name="user" value="{{ object.creator.id }} ">
+                {{ topic_comment_form.as_p }}
+                <button class="btn btn-succcess">ADD COMMENT</button>
+            </form>
         </div>
-    </div><hr>
-    {% endfor %} 
-    <div>
-        <h4>ADD COMMENT</h4>
-        <form action="{% url 'messageboard:topic_comment_create' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="topic_id" value="{{ object.id }}">
-            <input type="hidden" name="topic_slug" value="{{ object.slug }}">
-            <input type="hidden" name="user" value="{{ object.creator.id }} ">
-            {{ topic_comment_form | crispy }}
-            <button class="btn btn-succcess">ADD COMMENT</button>
-        </form>
-    </div>
-{% endif %}
-
-
+    {% else %}
+        {% for comment in object.topiccomment_set.all %}
+        <div class="container" >
+            <div id="light_blue">
+                <h5>created by:{{ comment.user.username }} on {{ comment.created_at }}</h5>
+                <p> {{ comment.body }}</p>
+            </div>
+        </div><hr>
+        {% endfor %} 
+        <div>
+            <h4>ADD COMMENT</h4>
+            <form action="{% url 'messageboard:topic_comment_create' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="topic_id" value="{{ object.id }}">
+                <input type="hidden" name="topic_slug" value="{{ object.slug }}">
+                <input type="hidden" name="user" value="{{ object.creator.id }} ">
+                {{ topic_comment_form | crispy }}
+                <button class="btn btn-succcess">ADD COMMENT</button>
+            </form>
+        </div>
+    {% endif %}
 </section>
-
-
 
 {% endblock %}

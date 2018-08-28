@@ -23,6 +23,9 @@ class Recommendation(BaseModel):
     def __str__(self):
         return "Comment subject: {}".format(self.subject)
 
+    class Meta:
+        verbose_name = "message"
+        
 
 class Image(BaseModel):
     image_name = models.CharField(max_length=100)
