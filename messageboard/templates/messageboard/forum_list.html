@@ -8,23 +8,43 @@
 
 {% block body %}
 <div>
+
     <div class="row">
-        <div class="col-7" id="forum_box">
+        <h1>test links</h1>
+        {% if user.is_authenticated %}
+            <a href="/accounts/logout/">
+                <h5>Logout Until Next Time</h5>
+            </a>
+        {% else %}
+            <a href="/accounts/signup/">
+                <h5>Sign Up/In to Communicate With Other Pet Lovers!</h5>
+            </a>
+        {% endif %}
+        <br>
+        {% if user.is_authenticated %}
+        <a href="/accounts/logout/">logout</a>
+    {% else %}
+        <a href="/accounts/signup/">login</a>
+    {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-6" id="forum_box">
             <div>
             {% for obj in object_list %}
             <div class="row" id="marginL">
 
-                <h5>Forum: <a href="{{ obj.get_absolute_url }}">{{ obj.slug }}</a></h5>
-                <p>Related Topics: {{ obj.topic_set.all.count }}</p> 
-                    {% if user in obj.moderators.all %}
+                <h3><a href="{{ obj.get_absolute_url }}">{{ obj.slug }}</a></h3>
+                <p>Related Topics: {{ obj.topic_set.all.count }}</p> <br>
+
+                {% if user in obj.moderators.all %}
                     <form action="{% url 'messageboard:forum_delete' obj.slug %}" id="floatR">
                         <button class="btn btn-danger">DELETE</button>
                     </form>
-            </div><hr>
                 {% endif %}
+            </div><hr>
                 {% empty %}
-                <p>NO FORUMS</p>
-                {% endfor %}
+                <p>No forums have been created yet</p>
+            {% endfor %}
             </div>
         </div>
 
@@ -51,6 +71,7 @@
                         </a>
                     </button>
                 </div>
+            </div>
         </div>
     </div>
 </div>

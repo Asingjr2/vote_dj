@@ -1,4 +1,4 @@
-# TODO_DJ
+# Adopt A Friend
 
 Web application using django functionality.
 
@@ -18,13 +18,16 @@ python manage.py runserver
 ## Installation pt. 2
 
 ```bash
-Application uses django-allauth to handle user signup, login, and logout.  Django-allauth has predefined urls and templates.  To read relevant documentation check out thier page at: https://django-allauth.readthedocs.io/en/latest/installation.html
+Application uses django-allauth to handle user signup, login, and logout.
+Django-allauth has predefined urls and templates.  
+To read relevant documentation check out thier page at:
+https://django-allauth.readthedocs.io/en/latest/installation.html
 ```
 
 ## API
 
 ```bash
-Application uses Google Maps API which requires login and user specific key.  For registration and to read documentation please check out: https://cloud.google.com/maps-platform/
-
-Locations used in directions application represent "real" monuments in either Virgina or Washington, DC.
+Application uses Google Maps API which requires login and user specific key.
+For registration and to read documentation please check out:
+https://cloud.google.com/maps-platform/
 ```
