@@ -8,6 +8,7 @@ Web application using django functionality.
 create directory
 virtualenv venv
 pip install -r requirements.txt
+set  'GOOGLE_API_KEY' environment variable with personal key
 python manage.py migrate
 python manage.py collectstatic
 python manage.py createsuperuser
