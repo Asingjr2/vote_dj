@@ -64,7 +64,6 @@ class AdoptFormTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-
     def test_unsuccessful_post(self):
         """
         Inccorect post returns user to same page rendering the template with existing forms data along with prompts to correct inaccurate fields.

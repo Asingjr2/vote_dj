@@ -29,7 +29,7 @@ class TopicCreateForm(ModelForm):
             "placeholder": "Add new message", 
             "maxLength":"300", 
         }), 
-    }
+        }
 
 
 class TopicCommentCreateForm(ModelForm):
@@ -43,4 +43,4 @@ class TopicCommentCreateForm(ModelForm):
             "placeholder": "Add new comment", 
             "maxLength":"250", 
         }), 
-    }
+        }

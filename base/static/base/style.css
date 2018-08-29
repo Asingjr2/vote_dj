@@ -1,9 +1,9 @@
 #main_container{
     background-image: linear-gradient(white, rgb(250, 216, 62));
-    height:100%;
+    height:auto;
+    min-height:1400px;
 }
 #body-container{
-    max-height: 100%;
 }
 #info_container{
     background-color:white;
@@ -14,7 +14,7 @@
     color: rgb(250, 216, 62);
     height:60px;
     padding-bottom:15px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     background-color: white;
     text-align: center;
     border-bottom: 5px ridge rgb(250, 216, 62);
@@ -25,7 +25,7 @@ h1,h5 {
 #info_banner{
     height:70px;
     padding: 10 0 10 0;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
     background-color: white;
     border-bottom: 5px ridge rgb(250, 216, 62);
 }

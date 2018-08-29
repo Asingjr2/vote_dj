@@ -10,7 +10,6 @@ class JobListingViewTestCase(TestCase):
         url = reverse("volunteer:jobs_listing")
         client = Client()
         response = client.get(url)
-
         self.assertEqual(response.status_code, 200)
 
 
@@ -21,7 +20,6 @@ class VolunteerApplicationFormViewTestCase(TestCase):
         url = "/volunteer/apply/{}".format(job.id)
         client = Client()
         response = client.get(url)
-
         self.assertEqual(response.status_code, 200)
 
     def test_200_post(self):
@@ -31,5 +29,4 @@ class VolunteerApplicationFormViewTestCase(TestCase):
         client = Client()
         data = {}
         response = client.post(url, data, follow=True)
-
         self.assertEqual(response.status_code, 200)

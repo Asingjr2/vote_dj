@@ -1,11 +1,11 @@
-from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView, ListView
-from django.views.generic.edit import DeleteView, CreateView
+from django.shortcuts import render
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.contrib import messages
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import DeleteView, CreateView
 
 from .forms import ApplicationForm
 from .models import Animal, Application
@@ -79,7 +79,6 @@ class AdoptFormView(CreateView):
     model = Application
     success_url = reverse_lazy("adopt:adopt_all")
     form_class = ApplicationForm
-    # fields = ["first_name", "last_name","street_address", "street_address_2", "family_size", "pets_doemail", "contact_number" ]
 
     def get_context_data(self, **kwargs):
         context = super(AdoptFormView, self).get_context_data(**kwargs)
@@ -89,7 +88,6 @@ class AdoptFormView(CreateView):
         self.request.session["current_pet_id"] = pet_id
         context["pet_name"] = Animal.objects.get(id=pet_id).name
         context["pet_id"] = self.request.session["current_pet_id"] 
-        # context["form2"] = ApplicationForm(self.request.POST)
         return context
 
     def form_valid(self, form):
@@ -98,7 +96,6 @@ class AdoptFormView(CreateView):
         return HttpResponseRedirect(reverse_lazy("adopt:adopt_all"))
     
     def form_invalid(self, form):
-        print("something happened", form.non_field_errors)
         if "first_name" in form.errors:
             messages.warning(self.request, 'First name must be between 1 and 50 characters')
         if "last_name" in form.errors:

@@ -4,7 +4,6 @@ import factory
 import factory.fuzzy
 
 from base.factories import BaseModelFactory
-
 from .models import Image, ImageVote, Recommendation
 
 

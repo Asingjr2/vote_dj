@@ -1,13 +1,13 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.views.generic import CreateView, ListView
-from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect, HttpRequest
-from django.contrib import messages
 from django.db.models import Q
+from django.shortcuts import render
+from django.contrib import messages
+from django.views.generic import TemplateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, ListView
+from django.http import HttpResponseRedirect, HttpRequest
 
-from .models import VolunteerApplication, VolunteerJob
 from .forms import VolunteerApplicationForm
+from .models import VolunteerApplication, VolunteerJob
 
 
 class JobListingView(ListView):
@@ -38,16 +38,13 @@ class VolunteerApplicationFormView(CreateView):
         job_id = url.replace("volunteer/apply/", "").replace("/", "")
         context["current_job"] = VolunteerJob.objects.get(id=job_id)
         self.request.session["current_job_id"] = job_id
-        print(self.request.session["current_job_id"])
         return context
 
     def form_valid(self, form):
-        print("form looks good")
         form.instance.job = VolunteerJob.objects.get(id=self.request.session["current_job_id"])
         self.object = form.save()
         return HttpResponseRedirect(reverse("volunteer:jobs_listing"))
 
     def form_invalid(self, form):
-        print("something happened", form.non_field_errors)
         messages.warning(self.request, 'Something went wrong!  Please try again')
         return HttpResponseRedirect(reverse("volunteer:jobs_listing"))

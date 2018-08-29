@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.urls import reverse
 
 
 class ModeratorRequiredMixin(LoginRequiredMixin, ABC):

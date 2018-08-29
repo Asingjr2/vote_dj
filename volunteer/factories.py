@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 import factory
 import factory.fuzzy
 
-from base.factories import BaseModelFactory
 from vote.factories import UserFactory
+from base.factories import BaseModelFactory
 from .models import VolunteerJob, VolunteerApplication
 
 
@@ -35,7 +35,6 @@ class VolunteerApplicationFactory(BaseModelFactory):
     class Meta:
         model = VolunteerApplication
 
-    # job = factory.SubFactory(VolunteerJobFactory)
     first_name = factory.fuzzy.FuzzyText(length=50)
     last_name = factory.fuzzy.FuzzyText(length=50)
     about_you = factory.fuzzy.FuzzyText(length=50)

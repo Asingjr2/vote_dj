@@ -5,6 +5,7 @@
 {% block body %}
 
 <h1>FORUM: {{ object.slug }}</h1>
+
 {% if object.topic_set.all.count < 1 %}
     <div >
         <h1>Be the first to create a topic in {{ object.slug | upper }}</h1>
@@ -38,6 +39,7 @@
         </tbody>
     </table>
     <hr><br>
+    
     <div>
         <h4>ADD TOPIC</h4>
         <form action="{% url 'messageboard:topic_create' %}" method="POST">

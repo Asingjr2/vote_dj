@@ -10,9 +10,6 @@ class ForumFactoryTestCase(TestCase):
         forum = ForumFactory()
 
         self.assertIsNotNone(forum.slug)
-        self.assertIsNotNone(forum.moderators)
-        self.assertIsNotNone(forum.created_at)
-        self.assertIsNotNone(forum.updated_at)
 
 
 class TopicFactoryTestCase(TestCase):

@@ -7,9 +7,10 @@ from .models import Recommendation
 
 class RecommendationForm(ModelForm):
     """
-    Creating formothat leaves out creator which can be added automatically if user is logged in.  
+    Creating form that leaves out creator which can be added automatically if user is logged in.  
     If user not logged in email will be saved.
     """
+    
     class Meta:
         model = Recommendation
         fields = ["subject", "body", "email"]

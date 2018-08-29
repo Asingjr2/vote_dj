@@ -40,7 +40,6 @@ class ApplicationFactory(BaseModelFactory):
     class Meta:
         model = Application
 
-    # pet = factory.SubFactory(AnimalFactory)
     first_name = factory.fuzzy.FuzzyText(length=50)
     last_name = factory.fuzzy.FuzzyText(length=50)
     street_address = factory.fuzzy.FuzzyText(length=250)

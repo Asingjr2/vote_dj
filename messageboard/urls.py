@@ -3,16 +3,12 @@ from django.urls import path
 from . import views
 from .views import (
     ForumDetailView, 
-    ForumCreateView, 
+    ForumCreateView,
     ForumListView,
     ForumDeleteView,
-
-    TopicDetailView, 
+    TopicDetailView,
     TopicCreateView,
-    TopicUpvoteView,
-    TopicDownvoteView,
-
-    TopicCommentCreateView, 
+    TopicCommentCreateView,
 )
 
 app_name = "messageboard"
@@ -38,13 +34,6 @@ urlpatterns = [
     path('topic/topic_create/',
          TopicCreateView.as_view(),
          name='topic_create'),
-    path('topics/<uuid:pk>/upvote/',
-         TopicUpvoteView.as_view(),
-         name='topic_upvote'),
-    path('topics/<uuid:pk>/downvote/',
-         TopicDownvoteView.as_view(),
-         name='topic_downvote'),
-
     path('comment/comment_create/',
          TopicCommentCreateView.as_view(),
          name='topic_comment_create'),

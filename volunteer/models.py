@@ -1,7 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.core.validators import MaxLengthValidator, MinLengthValidator, EmailValidator, MaxValueValidator, MinValueValidator
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.core.validators import (
+    MaxLengthValidator,
+    MinLengthValidator,
+    EmailValidator,
+    MaxValueValidator,
+    MinValueValidator
+)
 
 from base.models import BaseModel
 

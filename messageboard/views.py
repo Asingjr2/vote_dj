@@ -23,6 +23,7 @@ from .models import (
     DOWNVOTE,
 )
 
+
 class ForumDetailView(LoginRequiredMixin, DetailView):
     model = Forum
 
@@ -44,7 +45,6 @@ class ForumCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
     
     def form_invalid(self, form):
-        print("something happened", form.non_field_errors)
         if "slug" in form.errors:
             messages.warning(self.request, 'Forum name  cannot contain spaces.  Please try again!')
         return HttpResponseRedirect(reverse("messageboard:forum_create"))
@@ -73,7 +73,6 @@ class ForumDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class TopicCreateView(LoginRequiredMixin, View):
-    
     def post(self, request):
         form = TopicCreateForm(request.POST)
         if form.is_valid():
@@ -94,47 +93,6 @@ class TopicDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context["topic_comment_form"] = TopicCommentCreateForm()
         return context
-
-
-class TopicUpvoteView(LoginRequiredMixin, View):
-    def post(self, request, *args, **kwargs):
-        topic = get_object_or_404(Topic, id=self.kwargs.get('pk'))
-
-        try:
-            topic_vote = TopicVote.objects.get(
-                user=self.request.user,
-                topic=topic
-            )
-            topic_vote.vote = UPVOTE
-            topic_vote.save()
-        except TopicVote.DoesNotExist:
-            _ = TopicVote.objects.create(
-                user=self.request.user,
-                topic=topic,
-                vote=UPVOTE
-            )
-        # Changing redirect to home
-        return reverse("forum_list")
-
-
-class TopicDownvoteView(LoginRequiredMixin, View):
-    def post(self, request, *args, **kwargs):
-        topic = get_object_or_404(Topic, id=self.kwargs.get('pk'))
-
-        try:
-            topic_vote = TopicVote.objects.get(
-                user=self.request.user,
-                topic=topic
-            )
-            topic_vote.vote = DOWNVOTE
-            topic_vote.save()
-        except TopicVote.DoesNotExist:
-            _ = TopicVote.objects.create(
-                user=self.request.user,
-                topic=topic,
-                vote=DOWNVOTE
-            )
-        return reverse("forum_list")
 
 
 class TopicCommentCreateView(LoginRequiredMixin, View):

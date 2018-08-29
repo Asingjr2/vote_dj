@@ -6,10 +6,7 @@ from django.views.generic import TemplateView
 import requests
 
 from .locations import current_locations
-
-
-# Replace with information locked somewhere
-KEY = "AIzaSyCqau3bClOAWzm_pS8qhlVBtDAbFHrzSCQ"
+from .environment import KEY
 
 
 class MapHomeView(View):

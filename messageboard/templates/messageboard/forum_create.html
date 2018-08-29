@@ -4,16 +4,17 @@
 
 {% block body %}
 
-{% if messages %}
-<div class="alet alert-success alert-dismissable">
-    {% for message in messages %} 
-    <h5 id="bad_forum">{{ message }}</h5>
-    {% endfor %} 
-</div> 
-{% endif %}
-<form action="{% url 'messageboard:forum_create' %}" method="POST">
-    {% csrf_token %}
-    {{ form | crispy }}
-    <button class="btn btn-success">CREATE FORUM</button>
-</form>
+    {% if messages %}
+        <div class="alet alert-success alert-dismissable">
+            {% for message in messages %} 
+            <h5 id="bad_forum">{{ message }}</h5>
+            {% endfor %} 
+        </div> 
+    {% endif %}
+
+    <form action="{% url 'messageboard:forum_create' %}" method="POST">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button class="btn btn-success">CREATE FORUM</button>
+    </form>
 {% endblock %}

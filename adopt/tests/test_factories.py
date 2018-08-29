@@ -22,7 +22,6 @@ class ApplicationFactoryTestCase(TestCase):
     def test_factory(self):
         application = ApplicationFactory()
 
-        # self.assertIsNotNone(application.pet)
         self.assertIsNotNone(application.first_name)
         self.assertIsNotNone(application.last_name)
         self.assertIsNotNone(application.street_address)
