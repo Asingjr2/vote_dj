@@ -161,8 +161,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Allauth redirects for successful login or logout
-LOGIN_REDIRECT_URL = "/main"
-ACCOUNT_LOGOUT_REDIRECT_URL = "/main"
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
